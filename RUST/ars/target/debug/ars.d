@@ -1,1 +1,1 @@
-/home/ogata/RUST/ars/target/debug/ars: /home/ogata/RUST/ars/src/main.rs
+/home/ogata/Acquire-Release/RUST/ars/target/debug/ars: /home/ogata/Acquire-Release/RUST/ars/src/main.rs
