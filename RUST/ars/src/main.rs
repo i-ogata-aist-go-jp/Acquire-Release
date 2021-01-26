@@ -13,12 +13,9 @@ fn main() {
         ready_clone.store(true, Ordering::Release);
     });
     // consumer
-    let consumer = thread::spawn(move|| {
-        // Wait for the producer thread to release the lock
-        while !ready.load(Ordering::Acquire) {}
-        let r = data.load(Ordering::Relaxed);
-        println!("Data is {:?}",r);
-    });
-    let _resp = producer.join();
-    let _resc = consumer.join();
+    // Wait for the producer thread to release the lock
+    while !ready.load(Ordering::Acquire) {}
+    let r = data.load(Ordering::Relaxed);
+    println!("Data is {:?}",r);
+    let _res = producer.join();
 }
