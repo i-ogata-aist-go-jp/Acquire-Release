@@ -10,3 +10,10 @@ SRC = sample.cpp
 
 sample:	$(SRC)
 	 $(CC) $(OPTS) -pthread $(SRC)
+
+# ARMv8
+# https://godbolt.org/z/4d8P3s
+#
+# x86-64
+# https://godbolt.org/z/74xn46
+# 
