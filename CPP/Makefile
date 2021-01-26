@@ -1,11 +1,12 @@
 CC = g++ 
 OPTS = -O2 -std=c++2a 
-ARS = ars
-SRC = ars.cpp
 
-$(ARS):	$(SRC)
-	 $(CC) $(OPTS) -pthread -o $(ARS) $(SRC)
+ars:	ars.cpp
+	 $(CC) $(OPTS) -pthread -o ars ars.cpp
+
+new:	new.cpp
+	 $(CC) $(OPTS) -pthread -o new new.cpp
 
 .PHONY: clean
 clean:
-	rm $(ARS) 
+	rm ars
