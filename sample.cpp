@@ -1,11 +1,11 @@
 #include <atomic>
-std::atomic<int> data(0);
-std::atomic<int> ready(0);
-void producer() {
+
+void producer(std::atomic<int> &data,std::atomic<int> &ready) {
   data.store(42, std::memory_order_relaxed); // must be executed before next "store release"
   ready.store(1, std::memory_order_release);
+  
 }
-void consumer() {
+void consumer(std::atomic<int> &data,std::atomic<int> &ready) {
   while (!ready.load(std::memory_order_acquire)) {
   }
   int r = data.load(std::memory_order_relaxed);  // must be executed after previous "load acquire"
