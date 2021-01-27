@@ -8,7 +8,7 @@ fn main() {
     let data = Arc::new(AtomicI64::new(0));
     let data_clone = Arc::clone(&data);
     // producer
-    let producer = thread::spawn(move|| {
+    let t = thread::spawn(move|| {
         data_clone.store(42,Ordering::Relaxed);
         ready_clone.store(true, Ordering::Release);
     });
@@ -17,5 +17,5 @@ fn main() {
     while !ready.load(Ordering::Acquire) {}
     let r = data.load(Ordering::Relaxed);
     println!("Data is {:?}",r);
-    let _res = producer.join();
+    let _res = t.join();
 }
