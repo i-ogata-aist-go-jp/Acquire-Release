@@ -1,3 +1,4 @@
 RUST/ars/target
-CPP/new
-CPP/ars
+CPP/SAVE
+CPP/*/bin
+CPP/*/obj
