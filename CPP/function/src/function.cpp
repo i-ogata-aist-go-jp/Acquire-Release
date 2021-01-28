@@ -8,10 +8,9 @@ void producer(std::atomic<bool>& r, std::atomic<int>& d) {
 }
 
 void consumer(std::atomic<bool>& r, std::atomic<int>& d) {
-	int reg;
 	while (!r.load(std::memory_order_acquire)) {
 	}
-	reg = d.load(std::memory_order_relaxed);  // must be executed after previous "load acquire"
+	int reg = d.load(std::memory_order_relaxed);  // must be executed after previous "load acquire"
 	printf("data = %d\n",reg);
 }
 
