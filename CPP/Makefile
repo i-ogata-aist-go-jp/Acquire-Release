@@ -5,14 +5,8 @@ LIBS      =
 INCLUDE   = -I./include
 TARGET    = ./bin/$(shell basename `readlink -f .`)
 SRCDIR    = ./src
-ifeq "$(strip $(SRCDIR))" ""
-  SRCDIR  = .
-endif
 SOURCES   = $(wildcard $(SRCDIR)/*.cpp)
 OBJDIR    = ./obj
-ifeq "$(strip $(OBJDIR))" ""
-  OBJDIR  = .
-endif
 OBJECTS   = $(addprefix $(OBJDIR)/, $(notdir $(SOURCES:.cpp=.o)))
 ASMDIR    = ./asm
 ASMS      = $(addprefix $(ASMDIR)/, $(notdir $(SOURCES:.cpp=.s)))
