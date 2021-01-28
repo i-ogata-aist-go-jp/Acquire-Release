@@ -1,10 +1,6 @@
 COMPILER  = g++
 CFLAGS    =  -O3 -std=c++2a 
-ifeq "$(shell getconf LONG_BIT)" "64"
-  LDFLAGS = -pthread
-else
-  LDFLAGS = -pthread
-endif
+LDFLAGS = -pthread
 LIBS      =
 INCLUDE   = -I./include
 TARGET    = ./bin/$(shell basename `readlink -f .`)
