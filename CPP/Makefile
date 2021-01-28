@@ -12,8 +12,8 @@ ASMDIR    = ./asm
 ASMS      = $(addprefix $(ASMDIR)/, $(notdir $(SOURCES:.cpp=.s)))
 DEPENDS   = $(OBJECTS:.o=.d)
 
-$(TARGET): $(OBJECTS) $(LIBS) 
-	$(COMPILER) -o $@ $^ $(LDFLAGS)
+$(TARGET): $(OBJECTS) $(LIBS) $(ASMS)
+	$(COMPILER) -o $@ $(OBJECTS) $(LIBS) $(LDFLAGS)
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.cpp
 	-mkdir -p $(OBJDIR)
