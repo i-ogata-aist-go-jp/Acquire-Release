@@ -33,11 +33,14 @@ memory model の違いが分かる最小のサンプルコードを作ってみ�
 コードを x86 と ARMv8 をターゲットに compile し、その assembler の出力が違うことを見せる。
 
 （結果）
-c++20
+RUST
+
 https://godbolt.org/z/df7cfv
+
 https://godbolt.org/z/6r5j13
 
-RUST
+C++20
+
 https://godbolt.org/z/59sePW
 https://godbolt.org/z/bbEohq
 
