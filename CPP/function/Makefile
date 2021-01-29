@@ -1,1 +1,1 @@
-../Makefile
+../tools/Makefile
