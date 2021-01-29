@@ -32,6 +32,15 @@ memory model の違いが分かる最小のサンプルコードを作ってみ�
 プログラミング言語のレベルで Acquire-Release semanitcs を採用する C++20 と RUST で示す。
 コードを x86 と ARMv8 をターゲットに compile し、その assembler の出力が違うことを見せる。
 
+（結果）
+c++20
+https://godbolt.org/z/df7cfv
+https://godbolt.org/z/6r5j13
+
+RUST
+https://godbolt.org/z/59sePW
+https://godbolt.org/z/bbEohq
+
 （Acquire Release Semantics について）
 
 (RCsc maintains sequential consistency among special operations)
