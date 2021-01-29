@@ -48,9 +48,18 @@ https://godbolt.org/z/bbEohq
 
 （完全なコード）
 
-実際に稼働するコードは　github で公開しています。
+実際に動くるコードは　github で公開しています。
 
+https://github.com/i-ogata-aist-go-jp/Acquire-Release
 
+CPP/fuction
+thread を fuction で呼び出す。 make all でコンパイル。 function/bin/function で実行
+
+CPP/closure
+thread を closure で呼び出す。 make all でコンパイル。 closure/bin/closure で実行
+
+RUST/ars
+RUST で書くとこうなる。   cargo run で動きます。
 
 （Acquire Release Semantics について）
 
