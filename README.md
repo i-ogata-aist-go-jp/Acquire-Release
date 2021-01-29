@@ -4,7 +4,7 @@ apple社の Rosseta 2 は、なぜ速いのか？　を説明するために C++
 
 （概要）
 
-最新の macbook air や mac mini は爆速ですよね。心臓の apple silicon M1 という SoC は消費電力あたりで史上最高のプロセッサであるから当然です。 TSMC 5nm を採用し 160億トランジスタを集積していて、 100億前後の intel や AMD に対して明らかにアドバンテージがある。
+最新の macbook air や mac mini は爆速ですよね。心臓の apple silicon M1 という SoC は消費電力あたりで史上最高のプロセッサであるから当然です。 TSMC 5nm を採用し 160億トランジスタを集積していて、 100億トランジスタ前後の intel や AMD に対して明らかにアドバンテージがある。
 
 M1 の CPU は ARMv8 アーキテクチャです。　macbook / mac mini は、これまでは intel を使っていました。 x86  -> ARMv8 の移行を助けるために、 x86 バイナリーを emulation する Rosseta2 というシステムが提供されています。これがまた爆速なのですが、そこには秘密があります。
 
@@ -18,7 +18,7 @@ x86 の TSO セマンティクスでは、 Load / Load 及び Store / Store と�
 
 ※　 X86 では MOV (from memory) と MOV (to memory) と、 load / store のどちらも同じニーモニックの MOV 命令になって紛らわしいことに注意して下しい。
 
-その一方で ARMv8 では OoOE を許す ldr / str と、OoOE に制限がかかる ldar / stlr ( load acquire / store release )　の２系統の命令があります。後者が memory barrier の機能を提供します。 この時 x86 の MOV (from memory) を  ldar を使えば遅くなることが問題。 ldr を並列に実行出来ることの trade-off として ldar は「重く」なっているからです。
+その一方で ARMv8 では OoOE を許す LDR/STR と、OoOE に制限がかかる LDAR/STLR ( load Acquire / store reLease )　の２系統の命令があります。後者が memory barrier の機能を提供します。 この時 x86 の MOV (from memory) を  ldar を使えば遅くなることが問題。 ldr を並列に実行出来ることの trade-off として ldar は「重く」なっているからです。
 
 ここが memory model の違いの問題の本質です。
 
