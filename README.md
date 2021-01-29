@@ -30,7 +30,7 @@ memory barrier についての wikipedia を題材に x86 と ARMv8 の memory m
 
 memory model の違いが分かる最小のサンプルコードを作ってみる。
 プログラミング言語のレベルで Acquire-Release semanitcs を採用する C++20 と RUST で示す。
-コードを x86 と ARMv8 をターゲットに compile し、その assembler の出力が違うことを見せる。
+コードを x86 と ARMv8 をターゲットに compile し、その assembler の出力が違うことを Compiler Explorer https://godbolt.org/ で示す。
 
 （結果）
 RUST
@@ -42,6 +42,7 @@ https://godbolt.org/z/6r5j13
 C++20
 
 https://godbolt.org/z/59sePW
+
 https://godbolt.org/z/bbEohq
 
 （Acquire Release Semantics について）
