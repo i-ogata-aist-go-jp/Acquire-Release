@@ -33,6 +33,7 @@ memory model の違いが分かる最小のサンプルコードを作ってみ�
 コードを x86 と ARMv8 をターゲットに compile し、その assembler の出力が違うことを Compiler Explorer https://godbolt.org/ で示す。
 
 （結果）
+
 RUST
 
 https://godbolt.org/z/df7cfv
@@ -44,6 +45,12 @@ C++20
 https://godbolt.org/z/59sePW
 
 https://godbolt.org/z/bbEohq
+
+（完全なコード）
+
+実際に稼働するコードは　github で公開しています。
+
+
 
 （Acquire Release Semantics について）
 
