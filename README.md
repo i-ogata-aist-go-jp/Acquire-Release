@@ -48,7 +48,7 @@ https://godbolt.org/z/bbEohq
 
 （完全なコード）
 
-実際に動くるコードは　github で公開しています。
+実際に動くコードは　github で公開しています。
 
 https://github.com/i-ogata-aist-go-jp/Acquire-Release
 
