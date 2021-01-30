@@ -3,7 +3,10 @@ CFLAGS    =  -O3 -std=c++2a
 LDFLAGS = -pthread
 LIBS      =
 INCLUDE   = -I./include
-TARGET    = ./bin/$(shell basename `readlink -f .`)
+# BASEPATH != readlink -f .
+BASEPATH != ../tools/readlinkf-posix
+BASE != basename $(BASEPATH)
+TARGET    = ./bin/$(BASE)
 SRCDIR    = ./src
 SOURCES   = $(wildcard $(SRCDIR)/*.cpp)
 OBJDIR    = ./obj
