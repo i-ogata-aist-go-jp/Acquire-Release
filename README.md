@@ -32,6 +32,8 @@ memory model の違いが分かる最小のサンプルコードを作ってみ�
 プログラミング言語のレベルで Acquire-Release semanitcs を採用する C++20 と RUST で示す。
 コードを x86 と ARMv8 をターゲットに compile し、その assembler の出力が違うことを Compiler Explorer https://godbolt.org/ で示す。
 
+Go's atomics Load* and Store*  guarantee sequential consistency among the atomic variables (behave like C/C++'s seqconst atomics).
+
 （結果）
 
 RUST
