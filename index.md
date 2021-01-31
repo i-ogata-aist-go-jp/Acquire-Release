@@ -1,4 +1,4 @@
-Welcome to the Acquire-Release wiki!
+## Welcome to the Acquire-Release wiki!
 
 1. memory model の違いが分かる最小のサンプルコードを作ってみる。
 2. プログラミング言語のレベルで Acquire-Release semanitcs を採用する C++20 と RUST で示す。
