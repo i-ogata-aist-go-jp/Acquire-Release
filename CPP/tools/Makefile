@@ -1,4 +1,4 @@
-COMPILER  = g++
+COMPILER  = c++
 CFLAGS    =  -O3 -std=c++2a 
 LDFLAGS = -pthread
 LIBS      =
