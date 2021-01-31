@@ -28,7 +28,7 @@ x86 の TSO セマンティクスでは、 Load / Load 及び Store / Store と�
 
 ## 実際のコードで説明する
 
-[Link] https://en.wikipedia.org/wiki/Memory_barrier
+[Link](https://en.wikipedia.org/wiki/Memory_barrier)
 
 memory barrier についての wikipedia を題材に x86 と ARMv8 の memory model の違いの説明を試みています。おおまかな作戦は以下の通り。
 
@@ -40,21 +40,20 @@ Go's atomics Load* and Store* guarantee sequential consistency among the atomic 
 
 ### RUST
 
-https://godbolt.org/z/df7cfv
+[Link](https://godbolt.org/z/df7cfv)
 
-https://godbolt.org/z/6r5j13
+[Link](https://godbolt.org/z/6r5j1)
 
 ### C++20
 
-https://godbolt.org/z/59sePW
+[Link](https://godbolt.org/z/59sePW)
 
-https://godbolt.org/z/bbEohq
+[Link](https://godbolt.org/z/bbEohq)
 
 ## 完全なコード
 
 実際に動くコードは　github で公開しています。
-
-[Link] https://github.com/i-ogata-aist-go-jp/Acquire-Release
+[Link](https://github.com/i-ogata-aist-go-jp/Acquire-Release)
 
 1. CPP/fuction thread を fuction で呼び出す。 make all でコンパイル。 function/bin/function で実行
 2. CPP/closure thread を closure で呼び出す。 make all でコンパイル。 closure/bin/closure で実行
@@ -76,7 +75,7 @@ store release 　STRL で書き出され load acquire　LDRA で読みだされ�
 
 RISC-V Weak Memory Ordering (“RVWMO”) by Dan Lustig
 
-https://riscv.org/wp-content/uploads/2018/05/14.25-15.00-RISCVMemoryModelTutorial.pdf
+[Link](https://riscv.org/wp-content/uploads/2018/05/14.25-15.00-RISCVMemoryModelTutorial.pdf)
 
 ### Reference
 
@@ -88,10 +87,13 @@ AArch64 Load Relaxed: LDR Load Acquire: LDAR Store Relaxed: STR Store Release: S
 
 ### Reference
 
-[Link] https://arxiv.org/pdf/1803.04432.pdf Memory Models for C/C++ Programmers Manuel P¨oter Jesper Larsson Tr¨af
+[Link](https://arxiv.org/pdf/1803.04432.pdf Memory Models for C/C++ Programmers Manuel P¨oter Jesper Larsson Tr¨af)
+
 ### Reference
 
-[Link] https://preshing.com/20120913/acquire-and-release-semantics/ Acquire and Release Semantics
+[Link](https://preshing.com/20120913/acquire-and-release-semantics)
+
+Acquire and Release Semantics
 
 ### memo
 cross compiler $ arm-linux-gnueabihf-gcc -o hello_arm hello.cpp
