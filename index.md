@@ -1,8 +1,5 @@
 Welcome to the Acquire-Release wiki!
 
-- Bulleted
-- List
-
 1. memory model の違いが分かる最小のサンプルコードを作ってみる。
 2. プログラミング言語のレベルで Acquire-Release semanitcs を採用する C++20 と RUST で示す。
 3. コードを x86 と ARMv8 をターゲットに compile し、その assembler の出力が違うことを Compiler Explorer https://godbolt.org/ で示す
