@@ -5,12 +5,12 @@ Rosetta2 爆速の秘密を理解するための C++20 と RUST のコードを�
 Apple の Rosseta 2 は intel x86 の機械語を ARMv8 の機械語で emulate する仕組みです。爆速を実現するためにハードウェア（互換モード）の追加が必要だった（未公開情報）。
 問題の互換モードは load / store 命令の out-of-order 実行を制限するもので multi-thread でのみ意味を持ちます。この必要性を理解することは案外と難しい。
 
-- multi-thread での [memory barrier](https://en.wikipedia.org/wiki/Memory_barrier)、つまり load / store の Out-of-Order 実行を制限する必要性
-- x86 と ARMv8 の memory model の違い（＝ load /  store 命令の Out-of-Order 実行ををどのような機械語で制御するか）
+- multi-thread の環境での [memory barrier](https://en.wikipedia.org/wiki/Memory_barrier) の必要性。つまり load / store の Out-of-Order 実行を制限する必要性
+- x86 と ARMv8 の memory model の違い。つまり load /  store 命令の Out-of-Order 実行ををどのような機械語で制御するかの違い。
 
 ## 方法
 
-1. x86 と ARMv8 の memory model の違いが分かる最小のサンプルコードを作ることが目標
+1. x86 と ARMv8 の memory model の違いが分かる最小のサンプルコードを作った
 2. ARMv8 アーキテクチャは Acquire-Release semantics を持つ。そこでプログラミング言語のレベルで Acquire-Release semanitcs を採用する C++20 を採用する。 
 3. コードを x86 と ARMv8 をターゲットに compile し、その assembler の出力が違うことを [Compiler Explorer](https://godbolt.org/)で見る
 4. 出力された機械語を見ることで x86 の MOV 命令が ARMv8 の LDR/STR 命令には変換できないことを示す
