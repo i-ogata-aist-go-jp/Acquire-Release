@@ -3,7 +3,7 @@
 Rosetta2 爆速の秘密を理解するための C++20 と RUST のコードを作りました。
 
 Apple の Rosseta 2 は intel x86 の機械語を ARMv8 の機械語で emulate する仕組みです。爆速を実現するためにハードウェア（互換モード）の追加が必要だった（未公開情報）。
-互換モードは multi-thread での load / store 命令の out-of-order 実行を制限するもので、この必要性を理解することは案外と難しい。
+問題の互換モードは load / store 命令の out-of-order 実行を制限するもので multi-thread でのみ意味を持ちます。この必要性を理解することは案外と難しい。
 
 - multi-thread での [memory barrier](https://en.wikipedia.org/wiki/Memory_barrier)、つまり load / store の Out-of-Order 実行を制限する必要性
 - x86 と ARMv8 の memory model の違い（＝ load /  store 命令の Out-of-Order 実行ををどのような機械語で制御するか）
