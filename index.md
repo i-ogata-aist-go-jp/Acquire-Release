@@ -32,8 +32,11 @@ x86 の TSO セマンティクスでは、 Load / Load 及び Store / Store と�
 
 memory barrier についての wikipedia を題材に x86 と ARMv8 の memory model の違いの説明を試みています。おおまかな作戦は以下の通り。
 
-memory model の違いが分かる最小のサンプルコードを作ってみる。 プログラミング言語のレベルで Acquire-Release semanitcs を採用する C++20 と RUST で示す。 コードを x86 と ARMv8 をターゲットに compile し、その assembler の出力が違うことを  [Compiler Explorer](https://godbolt.org/) で示す。
+- memory model の違いが分かる最小のサンプルコードを作ってみる。
+- プログラミング言語のレベルで Acquire-Release semanitcs を採用する C++20 と RUST で示す。 
+- コードを x86 と ARMv8 をターゲットに compile し、その assembler の出力が違うことを  [Compiler Explorer](https://godbolt.org/) で示す。
 
+ちなみに Go は acquire / release semantics はサポートしません。より強力な sequential consistency のみがサポートされます。
 Go's atomics Load* and Store* guarantee sequential consistency among the atomic variables (behave like C/C++'s seqconst atomics).
 
 ## 結果
