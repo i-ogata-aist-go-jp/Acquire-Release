@@ -9,8 +9,8 @@ intel x86 の機械語を ARMv8 の機械語で emulate して実行する仕組
 
 1. 共有メモリのmulti-thread の環境での [memory barrier](https://en.wikipedia.org/wiki/Memory_barrier) の必要性。つまり load / store の Out-of-Order 実行を制限する必要性
 2. x86 と ARMv8 の memory model の違い。つまり load /  store 命令の Out-of-Order 実行ををどのような機械語で制御するかの違い。具体的には、
- 1. x86 は Total Store Order (TOS)  semantics である。
- 2. ARMv8 は Acquire Release　semantics である。
+ a. x86 は Total Store Order (TOS)  semantics である。
+ b. ARMv8 は Acquire Release　semantics である。
 
 ## 方法
 
