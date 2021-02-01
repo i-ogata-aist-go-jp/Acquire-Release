@@ -1,4 +1,4 @@
-## Welcome to the Acquire-Release wiki!
+# Welcome to the Acquire-Release wiki!
 
 1. memory model の違いが分かる最小のサンプルコードを作ってみる。
 2. プログラミング言語のレベルで Acquire-Release semanitcs を採用する C++20 と RUST で示す。
@@ -28,7 +28,7 @@ x86 の TSO セマンティクスでは、 Load / Load 及び Store / Store と�
 
 ## 実際のコードで説明する
 
-[Link](https://en.wikipedia.org/wiki/Memory_barrier)
+[memory barrier by Wikipedia](https://en.wikipedia.org/wiki/Memory_barrier)
 
 memory barrier についての wikipedia を題材に x86 と ARMv8 の memory model の違いの説明を試みています。おおまかな作戦は以下の通り。
 
@@ -40,15 +40,15 @@ Go's atomics Load* and Store* guarantee sequential consistency among the atomic 
 
 ### RUST
 
-[Link](https://godbolt.org/z/df7cfv)
+[x86-64](https://godbolt.org/z/df7cfv)
 
-[Link](https://godbolt.org/z/6r5j1)
+[ARMv8](https://godbolt.org/z/6r5j1)
 
 ### C++20
 
-[Link](https://godbolt.org/z/59sePW)
+[X86-64](https://godbolt.org/z/59sePW)
 
-[Link](https://godbolt.org/z/bbEohq)
+[ARMv8](https://godbolt.org/z/bbEohq)
 
 ## 完全なコード
 
@@ -71,31 +71,23 @@ Go's atomics Load* and Store* guarantee sequential consistency among the atomic 
 
 store release 　STRL で書き出され load acquire　LDRA で読みだされる「フラッグ」は git の header に相当し、それ以外で store / load されるものはデータ（ファイル）に相当する。 ファイルを編集（変更）した結果がすべて repository に書き込んだ上で header を更新するのが git push である。 header を読み取り、ファイルの変更を repository から読み出すのが git pull である。 git pull した情報は header 情報に対して consistent である。最新ではなくても、 consistent であることが重要。
 
-### Reference
+## References
 
-RISC-V Weak Memory Ordering (“RVWMO”) by Dan Lustig
+[RISC-V Weak Memory Ordering (“RVWMO”) by Dan Lustig](https://riscv.org/wp-content/uploads/2018/05/14.25-15.00-RISCVMemoryModelTutorial.pdf)
 
-[Link](https://riscv.org/wp-content/uploads/2018/05/14.25-15.00-RISCVMemoryModelTutorial.pdf)
 
-### Reference
+[C/C++11 mappings to processors](https://www.cl.cam.ac.uk/~pes20/cpp/cpp0xmappings.html)
 
-C/C++11 mappings to processors https://www.cl.cam.ac.uk/~pes20/cpp/cpp0xmappings.html
+- x86 (including x86-64) Load Relaxed: MOV (from memory) Load Acquire: MOV (from memory) Store Relaxed: MOV (into memory) Store Release: MOV (into memory)
+- AArch64 Load Relaxed: LDR Load Acquire: LDAR Store Relaxed: STR Store Release: STLR
 
-x86 (including x86-64) Load Relaxed: MOV (from memory) Load Acquire: MOV (from memory) Store Relaxed: MOV (into memory) Store Release: MOV (into memory)
 
-AArch64 Load Relaxed: LDR Load Acquire: LDAR Store Relaxed: STR Store Release: STLR
+[Memory Models for C/C++ Programmers Manuel P¨oter Jesper Larsson Tr¨af](https://arxiv.org/pdf/1803.04432.pdf) 
 
-### Reference
 
-[Link](https://arxiv.org/pdf/1803.04432.pdf Memory Models for C/C++ Programmers Manuel P¨oter Jesper Larsson Tr¨af)
+[Acquire and Release Semantics](https://preshing.com/20120913/acquire-and-release-semantics)
 
-### Reference
-
-[Link](https://preshing.com/20120913/acquire-and-release-semantics)
-
-Acquire and Release Semantics
-
-### memo
+## memo
 cross compiler $ arm-linux-gnueabihf-gcc -o hello_arm hello.cpp
 
 
