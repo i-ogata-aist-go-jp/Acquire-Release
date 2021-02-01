@@ -100,7 +100,7 @@ flag は git の header に相当し、それ以外で store / load されるも
  * Store Relaxed: MOV (into memory) 
  * Store Release: MOV (into memory)
  
-1. AArch64
+2. AArch64
  * Load Relaxed: LDR 
  * Load Acquire: LDAR 
  * Store Relaxed: STR 
