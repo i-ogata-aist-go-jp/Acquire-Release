@@ -77,7 +77,7 @@ flag は git の header に相当し、それ以外で store / load されるも
 
 - ファイルを編集（変更）した結果をすべて repository に書き込んだ上で header を書き込む（更新する）操作が git push 
 - header を読み取り、ファイルの変更を repository から読み出すのが git pull 
-- git pull した情報は 新ではないかもしれないが、header に関して consistent である。
+- git pull した情報は（最新ではないかもしれないが）　header に関して consistent である。
 
 ## References
 
@@ -97,8 +97,6 @@ flag は git の header に相当し、それ以外で store / load されるも
 
 ## memo
 cross compiler $ arm-linux-gnueabihf-gcc -o hello_arm hello.cpp
-
-
 
 
 
