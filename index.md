@@ -42,7 +42,7 @@ Go's atomics Load* and Store* guarantee sequential consistency among the atomic 
 
 [x86-64](https://godbolt.org/z/df7cfv)
 
-[ARMv8](https://godbolt.org/z/6r5j1)
+[ARMv8](https://godbolt.org/z/6r5j13)
 
 ### C++20
 
