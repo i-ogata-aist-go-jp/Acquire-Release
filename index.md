@@ -3,7 +3,7 @@
 Apple の Rosseta 2 は intel x86 の機械語を ARMv8 の機械語で emulate する仕組み。爆速を実現するためにはハードウェアの追加が必要だったようだ。
 multi-thread での load / store 命令の out-of-order 実行に関連するものなので、案外と難しい問題である。以下の２点の理解が必要である。
 
-- multi-thread での[memory barrier](https://en.wikipedia.org/wiki/Memory_barrier) （＝　load / store の Out-of-Order 実行を制限する命令）の知識
+- multi-thread での [memory barrier](https://en.wikipedia.org/wiki/Memory_barrier) （＝　load / store の Out-of-Order 実行を制限する命令）の知識
 - x86 と ARMv8 の memory model の違い（＝ memory barrier をどのような機械語で実現するか）
 
 ## 方法
