@@ -52,8 +52,8 @@ Go's atomics Load* and Store* guarantee sequential consistency among the atomic 
 
 ## 完全なコード
 
-実際に動くコードは　github で公開しています。
-[Link](https://github.com/i-ogata-aist-go-jp/Acquire-Release)
+実際に動くコードは [github](https://github.com/i-ogata-aist-go-jp/Acquire-Release)　で公開しています。
+
 
 1. CPP/fuction thread を fuction で呼び出す。 make all でコンパイル。 function/bin/function で実行
 2. CPP/closure thread を closure で呼び出す。 make all でコンパイル。 closure/bin/closure で実行
