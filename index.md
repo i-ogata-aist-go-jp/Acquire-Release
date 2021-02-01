@@ -95,16 +95,16 @@ flag は git の header に相当し、それ以外で store / load されるも
 [C/C++11 mappings to processors](https://www.cl.cam.ac.uk/~pes20/cpp/cpp0xmappings.html)
 
 - x86 (including x86-64)
- -- Load Relaxed: MOV (from memory) 
- -- Load Acquire: MOV (from memory) 
- -- Store Relaxed: MOV (into memory) 
- -- Store Release: MOV (into memory)
+ * Load Relaxed: MOV (from memory) 
+ * Load Acquire: MOV (from memory) 
+ * Store Relaxed: MOV (into memory) 
+ * Store Release: MOV (into memory)
  
 - AArch64 ]
- -- Load Relaxed: LDR 
- -- Load Acquire: LDAR 
- -- Store Relaxed: STR 
- -- Store Release: STLR
+ * Load Relaxed: LDR 
+ * Load Acquire: LDAR 
+ * Store Relaxed: STR 
+ * Store Release: STLR
 
 
 [Memory Models for C/C++ Programmers Manuel P¨oter Jesper Larsson Tr¨af](https://arxiv.org/pdf/1803.04432.pdf) 
