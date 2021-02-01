@@ -1,18 +1,20 @@
 # Apple macbook air の Rossetta 2 爆速の謎を解く
 
-Apple の Rosseta 2 は intel x86 の機械語を ARMv8 の機械語で emulate する仕組み。爆速を実現するためにはハードウェアの追加が必要だったようだ。
-multi-thread での load / store 命令の out-of-order 実行に関連するものなので、案外と難しい問題である。以下の２点の理解が必要である。
+Rosetta2 爆速の秘密を理解するための C++20 と RUST のコードを作りました。
 
-- multi-thread での [memory barrier](https://en.wikipedia.org/wiki/Memory_barrier) （＝　load / store の Out-of-Order 実行を制限する命令）の知識
-- x86 と ARMv8 の memory model の違い（＝ memory barrier をどのような機械語で実現するか）
+Apple の Rosseta 2 は intel x86 の機械語を ARMv8 の機械語で emulate する仕組みです。爆速を実現するためにハードウェア（互換モード）の追加が必要だった（未公開情報）。
+互換モードは multi-thread での load / store 命令の out-of-order 実行を制限するもので、この必要性を理解することは案外と難しい。
+
+- multi-thread での [memory barrier](https://en.wikipedia.org/wiki/Memory_barrier)、つまり load / store の Out-of-Order 実行を制限する必要性
+- x86 と ARMv8 の memory model の違い（＝ load /  store 命令の Out-of-Order 実行ををどのような機械語で制御するか）
 
 ## 方法
 
-1. memory model の違いが分かる最小のサンプルコードを作ってみる。
-2. プログラミング言語のレベルで Acquire-Release semanitcs を採用する C++20 と RUST で示す。
-3. コードを x86 と ARMv8 をターゲットに compile し、その assembler の出力が違うことを [Compiler Explorer](https://godbolt.org/)で示す
+1. x86 と ARMv8 の memory model の違いが分かる最小のサンプルコードを作ることが目標
+2. ARMv8 アーキテクチャは Acquire-Release semantics を持つ。そこでプログラミング言語のレベルで Acquire-Release semanitcs を採用する C++20 を採用する。 
+3. コードを x86 と ARMv8 をターゲットに compile し、その assembler の出力が違うことを [Compiler Explorer](https://godbolt.org/)で見る
+4. 出力された機械語を見ることで x86 の MOV 命令が ARMv8 の LDR/STR 命令には変換できないことを示す
 
-apple社の Rosseta 2 は、なぜ速いのか？　を説明するために C++20 と RUST のコードを作ってみました。
 
 ## 概要
 
