@@ -13,20 +13,21 @@
 が必要となります。
 そこで理解を助けるための C++20 と RUST のコードを作ってみました。
 
-## Rosetta2 の爆速の秘密を一言で言えば「x86 と ARMv8 の memory ordering の違いを互換モードで解決した（力技）」
+## Rosetta2 の爆速の秘密を一言で言えば『x86 と ARMv8 の memory ordering の違いを互換モードで解決する力技』
 
 これを理解してもらうことが本稿の目的です。
 
-Apple の [Rosseta2](https://en.wikipedia.org/wiki/Rosetta_(software)#Rosetta_2) は
-intel x86 の機械語を ARMv8 の機械語で emulate して実行する仕組みです。爆速を実現するためにハードウェア（互換モード）の追加が必要だったという噂（未公開情報）です。
+Apple の 
+[Rosseta2](https://en.wikipedia.org/wiki/Rosetta_(software)#Rosetta_2) 
+は intel x86 の機械語を ARMv8 の機械語で emulate して実行する仕組みです。爆速を実現するためにハードウェア（互換モード）の追加が必要だったという噂（未公開情報）です。
 具体的には load / store 命令の out-of-order 実行を制限するモードがある（らしい）のです。
 
 このモードの必要性を理解には、以下の知識が必要です。
 
 1. 共有メモリのmulti-thread の環境での [memory barrier](https://en.wikipedia.org/wiki/Memory_barrier) について。
 2. x86 と ARMv8 の memory ordering の違い。つまり load /  store 命令の Out-of-Order 実行をどう制御するかについてのアーキテクチャ（機械語の構成）の違いについて。具体的には、
- * x86 は Total Store Order (TOS)  semantics である。
- * ARMv8 は Acquire Release　semantics である。
+ * x86 は Total Store Order (TOS) である。
+ * ARMv8 は Acquire Release Order である。
 
 ## 方法
 
