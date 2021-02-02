@@ -1,7 +1,8 @@
 # Apple macbook air (2020,M1) の Rossetta 2 爆速の謎を解く
 
-心臓部の SoC　apple silicon M1 が消費電力あたりで史上最高のプロセッサであることは、既に広く解説されている通りです。
-しかし X86 のバイナリーをそのまま ARMv8 で emulation する [Rosseta2](https://en.wikipedia.org/wiki/Rosetta_(software)#Rosetta_2)
+心臓部の SoC [apple silicon M1](https://en.wikipedia.org/wiki/Apple_M1) 
+が消費電力あたりで史上最高のプロセッサであることは、既に広く解説されている通りです。しかし X86 のバイナリーをそのまま ARMv8 で emulation する 
+[Rosseta2](https://en.wikipedia.org/wiki/Rosetta_(software)#Rosetta_2)
 が爆速についての適切な解説は少ないように感じます。
 実は、これを理解するためには技術的にはちょっと複雑な知識 
 （
