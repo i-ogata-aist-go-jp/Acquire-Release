@@ -48,18 +48,22 @@ x86 を ARMv8 で emulation する障害の一つが memory model の違いで�
 
 そこで apple は特別な「互換モード」をハードウェア的に付け加えたらしいのです（この情報は公開されていなくて、現時点では噂）
 
-## 実際のコード
+## acquire release について
 
-[memory barrier by Wikipedia](https://en.wikipedia.org/wiki/Memory_barrier)
+[c++マニュアル](https://cpprefjp.github.io/reference/atomic/memory_order.html)
 
-memory barrier についての wikipedia を題材に x86 と ARMv8 の memory model の違いの説明を試みています。おおまかな作戦は以下の通り。
+- All operations following an acquire in program order also following it in global memory order
+- All operations preceding a release in program order also precede it in global memory order
+- A release that precedes an acquire in program order also precedes it in global memory order
 
-- memory model の違いが分かる最小のサンプルコードを作ってみる。
-- プログラミング言語のレベルで Acquire-Release semanitcs を採用する C++20 と RUST で示す。 
-- コードを x86 と ARMv8 をターゲットに compile し、その assembler の出力が違うことを  [Compiler Explorer](https://godbolt.org/) で示す。
+### store release = git push 、 load acquire = git pull というアナロジーは有用である。
 
-ちなみに Go は acquire / release semantics はサポートしません。より強力な sequential consistency のみがサポートされます。
-Go's atomics Load* and Store* guarantee sequential consistency among the atomic variables (behave like C/C++'s seqconst atomics).
+データの更新を通知する flag は store release (STRL) で書き出され load acquire　(LDRA) で読みだされる 
+flag は git の header に相当し、それ以外で store / load されるものはデータ（ファイル）に相当する。
+
+- ファイルを編集（変更）した結果をすべて repository に書き込んだ上で header を書き込む（更新する）操作が git push 
+- header を読み取り、ファイルの変更を repository から読み出すのが git pull 
+- git pull した情報は（最新ではないかもしれないが）　header に関して consistent である。
 
 ## 結果
 
@@ -89,7 +93,18 @@ Go's atomics Load* and Store* guarantee sequential consistency among the atomic 
 
 そこで apple は LDR/STR を TSO で動かす「互換モード」を M1 に付け加えたようなのです。
 
-## 完全なコード
+## 実際に動くコード
+
+[memory barrier by Wikipedia](https://en.wikipedia.org/wiki/Memory_barrier)
+
+memory barrier についての wikipedia を題材に x86 と ARMv8 の memory model の違いの説明を試みています。おおまかな作戦は以下の通り。
+
+- memory model の違いが分かる最小のサンプルコードを作ることとする。
+- プログラミング言語のレベルで Acquire-Release semanitcs を採用する C++20 と RUST で示す。 
+- コードを x86 と ARMv8 をターゲットに compile し、その assembler の出力が違うことを  [Compiler Explorer](https://godbolt.org/) で示す。
+
+ちなみに Go は acquire / release semantics はサポートしません。より強力な sequential consistency のみがサポートされます。
+Go's atomics Load* and Store* guarantee sequential consistency among the atomic variables (behave like C/C++'s seqconst atomics).
 
 実際に動くコードは [github](https://github.com/i-ogata-aist-go-jp/Acquire-Release)　で公開しています。
 
@@ -97,23 +112,6 @@ Go's atomics Load* and Store* guarantee sequential consistency among the atomic 
  - CPP/fuction thread を fuction で呼び出すコード。 　make all でコンパイル。 function/bin/function で実行
  - CPP/closure thread を closure で呼び出すコード。 　make all でコンパイル。 closure/bin/closure で実行
 3. RUST/ars RUST で書くとこうなる。 cargo run で動きます。
-
-## Acquire Release Semantics について
-
-### RCsc maintains sequential consistency among special operations
-
-- All operations following an acquire in program order also following it in global memory order
-- All operations preceding a release in program order also precede it in global memory order
-- A release that precedes an acquire in program order also precedes it in global memory order
-
-### store release = git push 、 load acquire = git pull というアナロジーは有用である。
-
-データの更新を通知する flag は store release (STRL) で書き出され load acquire　(LDRA) で読みだされる 
-flag は git の header に相当し、それ以外で store / load されるものはデータ（ファイル）に相当する。
-
-- ファイルを編集（変更）した結果をすべて repository に書き込んだ上で header を書き込む（更新する）操作が git push 
-- header を読み取り、ファイルの変更を repository から読み出すのが git pull 
-- git pull した情報は（最新ではないかもしれないが）　header に関して consistent である。
 
 ## References
 
