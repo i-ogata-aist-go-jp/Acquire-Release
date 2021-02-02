@@ -138,4 +138,4 @@ flag は git の header に相当し、それ以外で store / load されるも
 ## memo
 cross compiler $ arm-linux-gnueabihf-gcc -o hello_arm hello.cpp
 
-*bold* _italic_  `code is here`  'code is here'
+*bold* _italic_  `code is here` 
