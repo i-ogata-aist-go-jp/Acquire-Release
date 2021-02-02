@@ -11,3 +11,11 @@ SRC = sample.cpp
 
 sample:	$(SRC)
 	 $(CC) $(OPTS) -pthread $(SRC)
+
+### RUST
+#[x86-64](https://godbolt.org/z/df7cfv) 
+#[ARMv8](https://godbolt.org/z/6r5j13)
+
+### C++20
+#[X86-64](https://godbolt.org/z/x7j1rc) 
+#[ARMv8](https://godbolt.org/z/chsbxK)
