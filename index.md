@@ -1,14 +1,29 @@
-# Apple macbook air 2020 の Rossetta 2 爆速の謎を解く
+# Apple macbook air (2020,M1) の Rossetta 2 爆速の謎を解く
 
-Rosetta2 爆速の秘密を理解するための C++20 と RUST のコードを作りました。
+心臓部の SoC　apple silicon M1 が消費電力あたりで史上最高のプロセッサであることは、既に広く解説されている通りです。
+しかし X86 のバイナリーをそのまま ARMv8 で emulation する [Rosseta2](https://en.wikipedia.org/wiki/Rosetta_(software)#Rosetta_2)
+が爆速についての適切な解説は少ないように感じます。
+実は、これを理解するためには技術的にはちょっと複雑な知識 
+（
+[memory barrier](https://en.wikipedia.org/wiki/Memory_barrier) 
+[memory model](https://en.wikipedia.org/wiki/Memory_model_(programming))
+[memory ordering](https://en.wikipedia.org/wiki/Memory_ordering)
+）
+が必要となります。
+そこで理解を助けるための C++20 と RUST のコードを作ってみました。
+
+## Rosetta2 の爆速の秘密を一言で言えば「x86 と ARMv8 の memory model の違いをハードウェアで吸収した」
+
+これを理解してもらうことが本稿の目的です。
 
 Apple の [Rosseta2](https://en.wikipedia.org/wiki/Rosetta_(software)#Rosetta_2) は
-intel x86 の機械語を ARMv8 の機械語で emulate して実行する仕組みです。爆速を実現するためにハードウェア（互換モード）の追加が必要だったという噂（未公開情報）。
-具体的には load / store 命令の out-of-order 実行を制限するものです。
-この機能は共有メモリの multi-thread の環境でのみ意味を持ちます。なので、この機能の必要性を理解には、以下の知識が必要です。
+intel x86 の機械語を ARMv8 の機械語で emulate して実行する仕組みです。爆速を実現するためにハードウェア（互換モード）の追加が必要だったという噂（未公開情報）です。
+具体的には load / store 命令の out-of-order 実行を制限するモードがある（らしい）のです。
 
-1. 共有メモリのmulti-thread の環境での [memory barrier](https://en.wikipedia.org/wiki/Memory_barrier) の必要性。つまり load / store の Out-of-Order 実行を制限する必要性
-2. x86 と ARMv8 の memory model の違い。つまり load /  store 命令の Out-of-Order 実行をどう制御するかの違い。具体的には、
+このモードの必要性を理解には、以下の知識が必要です。
+
+1. 共有メモリのmulti-thread の環境での [memory barrier](https://en.wikipedia.org/wiki/Memory_barrier) について。
+2. x86 と ARMv8 の memory model の違い。つまり load /  store 命令の Out-of-Order 実行をどう制御するかについてのアーキテクチャ（機械語の構成）の違いについて。具体的には、
  * x86 は Total Store Order (TOS)  semantics である。
  * ARMv8 は Acquire Release　semantics である。
 
@@ -22,7 +37,7 @@ intel x86 の機械語を ARMv8 の機械語で emulate して実行する仕組
 
 ## 概要
 
-最新の macbook air や mac mini は爆速ですよね。心臓の apple silicon M1 という SoC は消費電力あたりで史上最高のプロセッサであるから当然です。 TSMC 5nm を採用し 160億トランジスタを集積していて、 100億トランジスタ前後の intel や AMD に対して明らかにアドバンテージがある。
+最新の macbook air や mac mini は爆速ですよね。心臓の apple silicon M1 という SoC は消費電力あたりで史上最高のプロセッサであるから当然です。 TSMC 5nm (N5) という最先端のプロセスをを採用し 160億トランジスタを集積しているので当然です。
 
 M1 の CPU は ARMv8 アーキテクチャです。　macbook / mac mini は、これまでは intel を使っていました。 x86 -> ARMv8 の移行を助けるために、 x86 バイナリーを emulation する Rosseta2 というシステムが提供されています。これがまた爆速なのですが、そこには秘密があります。
 
