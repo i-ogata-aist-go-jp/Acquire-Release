@@ -1,4 +1,4 @@
-# Apple macbook air の Rossetta 2 爆速の謎を解く
+# Apple macbook air 2020 の Rossetta 2 爆速の謎を解く
 
 Rosetta2 爆速の秘密を理解するための C++20 と RUST のコードを作りました。
 
