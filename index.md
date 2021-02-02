@@ -14,6 +14,16 @@
 が必要となります。
 そこで理解を助けるための `C++20` と `RUST` のコードを作ってみました。
 
+## 概要
+
+最新の macbook air や mac mini は爆速ですよね。心臓の apple silicon M1 という SoC は消費電力あたりで史上最高のプロセッサであるから当然です。 TSMC 5nm (N5) という最先端のプロセスをを採用し 160億トランジスタを集積しているので当然です。
+
+M1 の CPU は ARMv8 アーキテクチャです。　macbook / mac mini は、これまでは intel を使っていました。 x86 -> ARMv8 の移行を助けるために、 x86 バイナリーを emulation する Rosseta2 というシステムが提供されています。これがまた爆速なのですが、そこには秘密があります。
+
+x86 を ARMv8 で emulation する障害の一つが memory model の違いです。 x86 は Total Store Order (TSO) であり ARMv8 は Acquire-Release　semantics なのです。つまり memory barrier 命令の違いがあり、x86 を ARMv8 で『効率よく』 emulation するのは難しい。
+
+そこで apple は特別な「互換モード」をハードウェア的に付け加えたらしいのです（この情報は公開されていなくて、現時点では噂）
+
 ## Rosetta2 の爆速の秘密を一言で言えば『x86 と ARMv8 の memory ordering の違いを互換モードで解決する力技』
 
 これを理解してもらうことが本稿の目的です。
@@ -38,15 +48,7 @@ Apple の
 4.  x86 の MOV 命令が ARMv8 の LDR/STR 命令には変換できないことの説明となっている
 
 
-## 概要
 
-最新の macbook air や mac mini は爆速ですよね。心臓の apple silicon M1 という SoC は消費電力あたりで史上最高のプロセッサであるから当然です。 TSMC 5nm (N5) という最先端のプロセスをを採用し 160億トランジスタを集積しているので当然です。
-
-M1 の CPU は ARMv8 アーキテクチャです。　macbook / mac mini は、これまでは intel を使っていました。 x86 -> ARMv8 の移行を助けるために、 x86 バイナリーを emulation する Rosseta2 というシステムが提供されています。これがまた爆速なのですが、そこには秘密があります。
-
-x86 を ARMv8 で emulation する障害の一つが memory model の違いです。 x86 は Total Store Order (TSO) であり ARMv8 は Acquire-Release　semantics なのです。つまり memory barrier 命令の違いがあり、x86 を ARMv8 で『効率よく』 emulation するのは難しい。
-
-そこで apple は特別な「互換モード」をハードウェア的に付け加えたらしいのです（この情報は公開されていなくて、現時点では噂）
 
 ## acquire release について
 
