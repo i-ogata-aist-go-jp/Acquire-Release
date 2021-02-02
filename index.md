@@ -11,7 +11,7 @@
 [memory ordering](https://en.wikipedia.org/wiki/Memory_ordering)
 ）
 が必要となります。
-そこで理解を助けるための C++20 と RUST のコードを作ってみました。
+そこで理解を助けるための `C++20` と `RUST` のコードを作ってみました。
 
 ## Rosetta2 の爆速の秘密を一言で言えば『x86 と ARMv8 の memory ordering の違いを互換モードで解決する力技』
 
