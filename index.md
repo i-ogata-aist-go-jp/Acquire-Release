@@ -74,12 +74,12 @@ Go's atomics Load* and Store* guarantee sequential consistency among the atomic 
 
 ### RUST
 
-[x86-64](https://godbolt.org/z/df7cfv)  
+[x86-64](https://godbolt.org/z/df7cfv) 
 [ARMv8](https://godbolt.org/z/6r5j13)
 
 ### C++20
 
-[X86-64](https://godbolt.org/z/x7j1rc)
+[X86-64](https://godbolt.org/z/x7j1rc) 
 [ARMv8](https://godbolt.org/z/chsbxK)
 
 ## 完全なコード
