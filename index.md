@@ -73,36 +73,14 @@ Go's atomics Load* and Store* guarantee sequential consistency among the atomic 
 ## 結果
 
 ### RUST
-`pub fn producer(p: &mut AtomicUsize, q: &mut AtomicUsize) ->  () {
-    p.store(42,Relaxed);
-    q.store(1,Release)
-}`
 
-`pub fn consumer(p: &mut AtomicUsize, q: &mut AtomicUsize) ->  usize {
-    p.load(Acquire);
-    q.load(Relaxed)
-}`
-
-[x86-64](https://godbolt.org/z/df7cfv)
-
+[x86-64](https://godbolt.org/z/df7cfv)  
 [ARMv8](https://godbolt.org/z/6r5j13)
 
 ### C++20
 
-`void producer(std::atomic<int> &data,std::atomic<int> &ready) {
-  data.store(42, std::memory_order_relaxed); // must be executed before next "store release"
-  ready.store(1, std::memory_order_release);  
-}`
-
-`void consumer(std::atomic<int> &data,std::atomic<int> &ready) {
-  while (!ready.load(std::memory_order_acquire)) {
-  }
-  int r = data.load(std::memory_order_relaxed);  // must be executed after previous "load acquire"
-}`
-
-[X86-64](https://godbolt.org/z/59sePW)
-
-[ARMv8](https://godbolt.org/z/bbEohq)
+[X86-64](https://godbolt.org/z/x7j1rc)
+[ARMv8](https://godbolt.org/z/chsbxK)
 
 ## 完全なコード
 
