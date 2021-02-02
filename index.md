@@ -86,9 +86,9 @@ Go's atomics Load* and Store* guarantee sequential consistency among the atomic 
 
 実際に動くコードは [github](https://github.com/i-ogata-aist-go-jp/Acquire-Release)　で公開しています。
 
-1. CPP で make all
- a. CPP/fuction thread を fuction で呼び出す。 make all でコンパイル。 function/bin/function で実行
- b. CPP/closure thread を closure で呼び出す。 make all でコンパイル。 closure/bin/closure で実行
+1. CPP で make all　　（以下の 2つの make all を実行します）
+ - CPP/fuction thread を fuction で呼び出すコード。 　make all でコンパイル。 function/bin/function で実行
+ - CPP/closure thread を closure で呼び出すコード。 　make all でコンパイル。 closure/bin/closure で実行
 3. RUST/ars RUST で書くとこうなる。 cargo run で動きます。
 
 ## Acquire Release Semantics について
