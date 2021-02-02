@@ -51,6 +51,7 @@ x86 を ARMv8 で emulation する障害の一つが memory model の違いで�
 ## acquire release について
 
 [c++マニュアル](https://cpprefjp.github.io/reference/atomic/memory_order.html)
+[c++](https://en.cppreference.com/w/cpp/atomic/memory_order)
 
 - All operations following an acquire in program order also following it in global memory order
 - All operations preceding a release in program order also precede it in global memory order
