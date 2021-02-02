@@ -75,13 +75,19 @@ Go's atomics Load* and Store* guarantee sequential consistency among the atomic 
 
 ## 解説
 
-1. x86 の TSO セマンティクスでは、 Load / Load 及び Store / Store というシーケンスは、機械語命令の順番に沿って直列に実行されます。 Out-of-Order 実行 (OoOE) の対象外なので、当然 OoOE を制限する memory barrier 命令は不要です。
+1. x86 の TSO では、 Load / Load 及び Store / Store というシーケンスは、機械語命令の順番に沿って直列に実行されます。
+つまり、そもそもが Out-of-Order 実行 (OoOE) の対象外なので、当然 OoOE を制限する memory barrier 命令は不要です。
 
 ※　 X86 では MOV (from memory) と MOV (into memory) と、 load / store のどちらも同じニーモニックの MOV 命令になって紛らわしいことに注意して下しい。
 
-2. その一方で ARMv8 では OoOE を許す LDR/STR と、OoOE に制限がかかる LDAR/STLR ( load Acquire / store reLease )　の２系統の命令があります。後者が memory barrier の機能を提供します。 この時 x86 の MOV (from memory) を ldar を使えば遅くなることが問題。 ldr を並列に実行出来ることの trade-off として ldar は「重く」なっているからです。
+2. その一方で ARMv8 では OoOE を許す LDR/STR と、OoOE に制限がかかる LDAR/STLR ( load Acquire / store reLease )　の２系統の命令があります。後者が memory barrier の機能を提供します。 
 
-ここが memory model の違いの問題の本質です。
+結論として
+
+1. x86 の MOV (from memory / into memory) を LDR/STR で emulation することは出来ない。multi-thread な環境では意味が違ってしまうからです。
+2. もちろん　LDAR/STLR で愚直に emulation をすることは出来ますが、これは overhead が大きすぎる。
+
+そこで apple は LDR/STR を TSO で動かす「互換モード」を M1 に付け加えたようなのです。
 
 ## 完全なコード
 
