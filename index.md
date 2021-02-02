@@ -1,9 +1,10 @@
 # Apple macbook air (2020,M1) の Rossetta 2 爆速の謎を解く
 
 心臓部の SoC [apple silicon M1](https://en.wikipedia.org/wiki/Apple_M1) 
-が消費電力あたりで史上最高のプロセッサであることは、既に広く解説されている通りです。しかし X86 のバイナリーをそのまま ARMv8 で emulation する 
+が消費電力あたりで史上最高のプロセッサであることは、既に広く解説されている通りです。
+しかし
 [Rosseta2](https://en.wikipedia.org/wiki/Rosetta_(software)#Rosetta_2)
-が爆速についての適切な解説は少ないように感じます。
+が爆速についての適切な解説は少ないように感じます。（Rosetta2 は X86 のバイナリーをそのまま ARMv8 で emulation するアプリ）
 実は、これを理解するためには技術的にはちょっと複雑な知識 
 （
 [memory barrier](https://en.wikipedia.org/wiki/Memory_barrier) /
@@ -134,6 +135,6 @@ flag は git の header に相当し、それ以外で store / load されるも
 [Acquire and Release Semantics](https://preshing.com/20120913/acquire-and-release-semantics)
 
 ## memo
-cross compiler $ arm-linux-gnueabihf-gcc -o hello_arm hello.cpp
+cross compiler `$ arm-linux-gnueabihf-gcc -o hello_arm hello.cpp`
 
-*bold* _italic_  `code is here` 
+
