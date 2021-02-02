@@ -5,8 +5,8 @@
 が爆速についての適切な解説は少ないように感じます。
 実は、これを理解するためには技術的にはちょっと複雑な知識 
 （
-[memory barrier](https://en.wikipedia.org/wiki/Memory_barrier) 
-[memory model](https://en.wikipedia.org/wiki/Memory_model_(programming))
+[memory barrier](https://en.wikipedia.org/wiki/Memory_barrier) /
+[memory model](https://en.wikipedia.org/wiki/Memory_model_(programming)) /
 [memory ordering](https://en.wikipedia.org/wiki/Memory_ordering)
 ）
 が必要となります。
