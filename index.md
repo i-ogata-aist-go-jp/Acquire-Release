@@ -26,7 +26,7 @@ Apple の
 
 1. 共有メモリのmulti-thread の環境での [memory barrier](https://en.wikipedia.org/wiki/Memory_barrier) について。
 2. x86 と ARMv8 の memory ordering の違い。つまり load /  store 命令の Out-of-Order 実行をどう制御するかについてのアーキテクチャ（機械語の構成）の違いについて。具体的には、
- * x86 は Total Store Order (TOS) である。
+ * x86 は Total Store Order (TSO) である。
  * ARMv8 は Acquire Release Order である。
 
 ## 方法
