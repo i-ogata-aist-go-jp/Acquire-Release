@@ -73,6 +73,14 @@ Go's atomics Load* and Store* guarantee sequential consistency among the atomic 
 ## 結果
 
 ### RUST
+`pub fn producer(p: &mut AtomicUsize, q: &mut AtomicUsize) ->  () {
+    p.store(42,Relaxed);
+    q.store(1,Release)
+}
+pub fn consumer(p: &mut AtomicUsize, q: &mut AtomicUsize) ->  usize {
+    p.load(Acquire);
+    q.load(Relaxed)
+}`
 
 [x86-64](https://godbolt.org/z/df7cfv)
 
