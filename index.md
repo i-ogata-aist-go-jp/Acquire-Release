@@ -16,7 +16,7 @@
 
 ## 概要
 
-最新の macbook air や mac mini は爆速ですよね。心臓の apple silicon M1 という SoC は消費電力あたりで史上最高のプロセッサです。 TSMC 5nm (N5) という最先端のプロセスをを採用し 160億トランジスタを集積しています。
+最新の macbook air や mac mini は爆速ですよね。心臓の apple silicon M1 という SoC は消費電力あたりで史上最高のプロセッサです。 TSMC 5nm (N5) という最先端のプロセスを採用し 160億トランジスタを集積しています。
 
 M1 の CPU は ARMv8 アーキテクチャです。　macbook / mac mini は、これまでは intel を使っていました。 x86 -> ARMv8 の移行を助けるために、 x86 バイナリーを emulation する Rosseta2 というシステムが提供されています。これがまた爆速なのですが、そこには秘密があります。
 
