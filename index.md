@@ -141,14 +141,14 @@ flag は git の header に相当し、それ以外で store / load されるも
 ## memo
 cross compiler `$ arm-linux-gnueabihf-gcc -o hello_arm hello.cpp`
 
-## おまけ
+## Read-modify-Write 命令のパフォーマンス
 
 apple silicon M1 は  lock-free atomic read-modify-write  命令でも memory order の指定が出来る。
-例えば reference count では、increment には relaxed が使える。（ decrement では release が必要。誤削除を防ぐため。）
+例えば reference count では、increment には relaxed が使え、並列度が上がる可能性がある。一方 decrement では release が必要。誤削除を防ぐため。
 
 1. ARMv8.3 (ARM64e) では、 swp/cas/ldadd 命令などがサポートされている。
 
-[RUST/ARMv8.3+ aarch64-apple-darwin](https://godbolt.org/z/G4ad1T)
+[RUST/ARMv8.3+ aarch64-apple-darwin](https://godbolt.org/z/7bz8ov)
 
 2. apple 以外の ARMv8.2 以下では
 [Load-link/store-conditional](https://en.wikipedia.org/wiki/Load-link/store-conditional)
@@ -160,10 +160,10 @@ apple silicon M1 は  lock-free atomic read-modify-write  命令でも memory or
 
 [reference count の GC のパフォーマンスへの影響？](https://twitter.com/Catfish_Man/status/1318648464822120448)
 
-[RUST/ARMv8 aarch64-unknown-linux-gnu](https://godbolt.org/z/e7ceqx)
+[RUST/ARMv8 aarch64-unknown-linux-gnu](https://godbolt.org/z/eWE3rG)
 
 3.  x86_64
 
-[RUST/x86 x86_64-unknown-linux-gnu](https://godbolt.org/z/Wf7dEa)
+[RUST/x86 x86_64-unknown-linux-gnu](https://godbolt.org/z/x36fqP)
 
 
