@@ -150,13 +150,11 @@ apple silicon M1 は  lock-free atomic read-modify-write  命令でも memory or
 
 [RUST/ARMv8.3+ aarch64-apple-darwin](https://godbolt.org/z/7bz8ov)
 
-### apple 以外の ARMv8.2 以下では
-[Load-link/store-conditional](https://en.wikipedia.org/wiki/Load-link/store-conditional)
-のみのサポートである。
+### apple 以外の ARMv8.2 以下では [Load-link/store-conditional](https://en.wikipedia.org/wiki/Load-link/store-conditional)  のみのサポートである。
 
 [RUST/ARMv8 aarch64-unknown-linux-gnu](https://godbolt.org/z/eWE3rG)
 
-### x86_64
+### x86_64 では memory order は sequential consistent に固定される
 
 [RUST/x86 x86_64-unknown-linux-gnu](https://godbolt.org/z/x36fqP)
 
