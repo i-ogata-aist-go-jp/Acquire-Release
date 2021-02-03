@@ -145,8 +145,10 @@ cross compiler `$ arm-linux-gnueabihf-gcc -o hello_arm hello.cpp`
 
 apple silicon M1 は ARMv8.3+ の atomic 命令のパフォーマンスも良いらしい。
 
-[RUST/ARMv8](https://godbolt.org/z/8sdPK6)
+[RUST/ARMv8.3+](https://godbolt.org/z/G4ad1T)
 
-[RUST/x86](https://godbolt.org/z/998hEj)
+[RUST/ARMv8](https://godbolt.org/z/e7ceqx)
+
+[RUST/x86](https://godbolt.org/z/Wf7dEa)
 
 
