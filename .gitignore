@@ -1,4 +1,4 @@
-RUST/ars/target/debug
+RUST/*/target/debug
 CPP/SAVE
 CPP/*/bin
 CPP/*/obj
