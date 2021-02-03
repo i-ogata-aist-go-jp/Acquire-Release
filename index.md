@@ -143,7 +143,8 @@ cross compiler `$ arm-linux-gnueabihf-gcc -o hello_arm hello.cpp`
 
 ## おまけ
 
-apple silicon M1 は  lock-free atomic read-modify-write  命令のパフォーマンスも良いらしい。
+apple silicon M1 は  lock-free atomic read-modify-write  命令でも memory order の指定が出来る。
+例えば reference count では、increment には relaxed が使える。（ decrement では release が必要。誤削除を防ぐため。）
 
 1. ARMv8.3 (ARM64e) では、 swp/cas/ldadd 命令などがサポートされている。
 
@@ -152,6 +153,12 @@ apple silicon M1 は  lock-free atomic read-modify-write  命令のパフォー�
 2. apple 以外の ARMv8.2 以下では
 [Load-link/store-conditional](https://en.wikipedia.org/wiki/Load-link/store-conditional)
 のみのサポートである。
+
+### Rerences　(twitter)
+
+[ObjectiveC の reference count では M1 は intel の5倍速い](https://twitter.com/Catfish_Man/status/1326238434235568128)
+
+[reference count の GC のパフォーマンスへの影響？](https://twitter.com/Catfish_Man/status/1318648464822120448)
 
 [RUST/ARMv8 aarch64-unknown-linux-gnu](https://godbolt.org/z/e7ceqx)
 
