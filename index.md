@@ -162,6 +162,4 @@ apple silicon M1 は  lock-free atomic read-modify-write  命令でも memory or
 
 [ObjectiveC の reference count では M1 は intel の5倍速い](https://twitter.com/Catfish_Man/status/1326238434235568128)
 
-[reference count の GC のパフォーマンスへの影響？](https://twitter.com/Catfish_Man/status/1318648464822120448)
-
 
