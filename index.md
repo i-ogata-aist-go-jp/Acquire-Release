@@ -154,16 +154,16 @@ apple silicon M1 は  lock-free atomic read-modify-write  命令でも memory or
 [Load-link/store-conditional](https://en.wikipedia.org/wiki/Load-link/store-conditional)
 のみのサポートである。
 
-### Rerences　(twitter)
-
-[ObjectiveC の reference count では M1 は intel の5倍速い](https://twitter.com/Catfish_Man/status/1326238434235568128)
-
-[reference count の GC のパフォーマンスへの影響？](https://twitter.com/Catfish_Man/status/1318648464822120448)
-
 [RUST/ARMv8 aarch64-unknown-linux-gnu](https://godbolt.org/z/eWE3rG)
 
 3.  x86_64
 
 [RUST/x86 x86_64-unknown-linux-gnu](https://godbolt.org/z/x36fqP)
+
+### Rerences　(twitter)
+
+[ObjectiveC の reference count では M1 は intel の5倍速い](https://twitter.com/Catfish_Man/status/1326238434235568128)
+
+[reference count の GC のパフォーマンスへの影響？](https://twitter.com/Catfish_Man/status/1318648464822120448)
 
 
