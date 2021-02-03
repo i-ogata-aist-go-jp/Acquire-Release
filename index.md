@@ -147,6 +147,10 @@ apple silicon M1 は ARMv8.3+ の atomic 命令のパフォーマンスも良い
 
 [RUST/ARMv8.3+ aarch64-apple-darwin](https://godbolt.org/z/G4ad1T)
 
+ARMv8.0 では
+[Load-link/store-conditional](https://en.wikipedia.org/wiki/Load-link/store-conditional)
+のみのサポートだった。
+
 [RUST/ARMv8 aarch64-unknown-linux-gnu](https://godbolt.org/z/e7ceqx)
 
 [RUST/x86 x86_64-unknown-linux-gnu](https://godbolt.org/z/Wf7dEa)
