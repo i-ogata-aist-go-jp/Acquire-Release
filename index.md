@@ -143,7 +143,7 @@ cross compiler `$ arm-linux-gnueabihf-gcc -o hello_arm hello.cpp`
 
 ## おまけ
 
-apple silicon M1 は ARMv8.3+ の atomic 命令のパフォーマンスも良いらしい。
+apple silicon M1 は  lock-free atomic read-modify-write  命令のパフォーマンスも良いらしい。
 
 1. ARMv8.3 (ARM64e) では、 swp/cas/ldadd 命令などがサポートされている。
 
