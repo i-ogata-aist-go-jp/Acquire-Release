@@ -47,28 +47,6 @@ Apple の
 3. サンプルコードを x86 と ARMv8 をターゲットに compile し、その assembler の出力が違うことを [Compiler Explorer](https://godbolt.org/)で見てみる
 4.  x86 の MOV 命令が ARMv8 の LDR/STR 命令には変換できないことの説明となっている
 
-
-
-
-## acquire release について
-
-[c++マニュアル](https://cpprefjp.github.io/reference/atomic/memory_order.html)
-
-[c++manual](https://en.cppreference.com/w/cpp/atomic/memory_order)
-
-- All operations following an acquire in program order also following it in global memory order
-- All operations preceding a release in program order also precede it in global memory order
-- A release that precedes an acquire in program order also precedes it in global memory order
-
-### store release = git push 、 load acquire = git pull というアナロジーは有用である。
-
-データの更新を通知する flag は store release (STRL) で書き出され load acquire　(LDRA) で読みだされる 
-flag は git の header に相当し、それ以外で store / load されるものはデータ（ファイル）に相当する。
-
-- ファイルを編集（変更）した結果をすべて repository に書き込んだ上で header を書き込む（更新する）操作が git push 
-- header を読み取り、ファイルの変更を repository から読み出すのが git pull 
-- git pull した情報は（最新ではないかもしれないが）　header に関して consistent である。
-
 ## 結果
 
 ### RUST
@@ -117,6 +95,25 @@ Go's atomics Load* and Store* guarantee sequential consistency among the atomic 
  - CPP/closure thread を closure で呼び出すコード。 　make all でコンパイル。 closure/bin/closure で実行
 3. RUST/ars RUST で書くとこうなる。 cargo run で動きます。
 
+## memory order: 特に ARMv8 が採用する acquire release について
+
+[c++マニュアル](https://cpprefjp.github.io/reference/atomic/memory_order.html)
+
+[c++manual](https://en.cppreference.com/w/cpp/atomic/memory_order)
+
+- All operations following an acquire in program order also following it in global memory order
+- All operations preceding a release in program order also precede it in global memory order
+- A release that precedes an acquire in program order also precedes it in global memory order
+
+### store release = git push 、 load acquire = git pull というアナロジーは有用である。
+
+データの更新を通知する flag は store release (STRL) で書き出され load acquire　(LDRA) で読みだされる 
+flag は git の header に相当し、それ以外で store / load されるものはデータ（ファイル）に相当する。
+
+- ファイルを編集（変更）した結果をすべて repository に書き込んだ上で header を書き込む（更新する）操作が git push 
+- header を読み取り、ファイルの変更を repository から読み出すのが git pull 
+- git pull した情報は（最新ではないかもしれないが）　header に関して consistent である。
+
 ## References
 
 [RISC-V Weak Memory Ordering (“RVWMO”) by Dan Lustig](https://riscv.org/wp-content/uploads/2018/05/14.25-15.00-RISCVMemoryModelTutorial.pdf)
@@ -135,7 +132,6 @@ Go's atomics Load* and Store* guarantee sequential consistency among the atomic 
  * Load Acquire: LDAR 
  * Store Relaxed: STR 
  * Store Release: STLR
-
 
 [Memory Models for C/C++ Programmers Manuel P¨oter Jesper Larsson Tr¨af](https://arxiv.org/pdf/1803.04432.pdf) 
 
