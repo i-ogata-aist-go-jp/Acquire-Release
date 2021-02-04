@@ -1,8 +1,9 @@
 use std::time::Instant;
 use std::sync::atomic::{AtomicI64,Ordering};
 
-const G: i64 = 1024 * 1024 * 1024;
-const LOOP: i64 =  8 * G ;
+const K: i64 = 1000;
+const G: i64 = K * K * K;
+const LOOP: i64 =  10 * G ;
 
 fn count_up(k:Ordering) {
     let c = AtomicI64::new(0);
