@@ -158,8 +158,7 @@ apple silicon M1 は  lock-free atomic read-modify-write  命令でも memory or
 
 [RUST/x86 x86_64-unknown-linux-gnu](https://godbolt.org/z/x36fqP)
 
-### Rerences　(twitter)
-
-[ObjectiveC の reference count では M1 は intel の5倍速い](https://twitter.com/Catfish_Man/status/1326238434235568128)
-
+[aarch64-apple-darwin](https://godbolt.org/z/P9Kbc7)
+[aarch64-apple-ios](https://godbolt.org/z/bqKz9M)
+[x86_64-unknown-linux-gnu](https://godbolt.org/z/sjTb8W)
 
