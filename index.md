@@ -146,15 +146,15 @@ cross compiler `$ arm-linux-gnueabihf-gcc -o hello_arm hello.cpp`
 apple silicon M1 は  lock-free atomic read-modify-write  命令でも memory order の指定が出来る。
 例えば reference count では、increment には relaxed が使え、並列度が上がる可能性がある。一方 decrement では release が必要。誤削除を防ぐため。
 
-1. ARMv8.3 (ARM64e) では、 swp/cas/ldadd 命令などがサポートされている。
+1) ARMv8.3 (ARM64e) では、 swp/cas/ldadd 命令などがサポートされている。
 
 [RUST/ARMv8.3+ aarch64-apple-darwin](https://godbolt.org/z/7bz8ov)
 
-2. apple 以外の ARMv8.2 以下では [Load-link/store-conditional](https://en.wikipedia.org/wiki/Load-link/store-conditional)  のみのサポートである。
+2) apple 以外の ARMv8.2 以下では [Load-link/store-conditional](https://en.wikipedia.org/wiki/Load-link/store-conditional)  のみのサポートである。
 
 [RUST/ARMv8 aarch64-unknown-linux-gnu](https://godbolt.org/z/eWE3rG)
 
-3. x86_64 では memory order は sequential consistent に固定される
+3) x86_64 では memory order は sequential consistent に固定される
 
 [RUST/x86 x86_64-unknown-linux-gnu](https://godbolt.org/z/x36fqP)
 
