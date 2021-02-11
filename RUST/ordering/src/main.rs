@@ -5,10 +5,10 @@ use std::thread;
 use num_format::{Locale, ToFormattedString};
 use std::time::Instant;
 
-const MAX: i32 = 1_000_000;
+const MAX: i32 = 100_000_000;
 
 fn main () {
-    let mut detected: u64 = 0;
+    let mut detected: i32 = 0;
     // shared variables
     let exit = Arc::new(AtomicBool::new(false));
     let x = Arc::new(AtomicUsize::new(0));
