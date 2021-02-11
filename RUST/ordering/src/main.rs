@@ -5,7 +5,7 @@ use std::thread;
 use num_format::{Locale, ToFormattedString};
 use std::time::Instant;
 
-const MAX :u64 = 10_000_000_u64;
+const MAX: i32 = 1_000_000;
 
 fn main () {
     let mut detected: u64 = 0;
