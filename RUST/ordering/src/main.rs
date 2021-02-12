@@ -70,7 +70,7 @@ fn main () {
         if r1.load(Ordering::Relaxed) == 0 && r2.load(Ordering::Relaxed) == 0 {
             detected += 1;
             let sss = iterations.to_formatted_string(&Locale::en);
-            println!("{:?} reorders detected after {:?} iterations", detected, sss);
+            println!("{:?} reorders detected after {} iterations", detected, sss);
         }
     }
     let end = start.elapsed();
