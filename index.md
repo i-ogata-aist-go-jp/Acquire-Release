@@ -141,7 +141,7 @@ flag は git の header に相当し、それ以外で store / load されるも
 ## memo
 cross compiler `$ arm-linux-gnueabihf-gcc -o hello_arm hello.cpp`
 
-## Read-modify-Write 命令のパフォーマンス
+# おまけ（１）　Read-modify-Write 命令のパフォーマンスについて
 
 apple silicon M1 は  lock-free atomic read-modify-write  命令でも memory order の指定が出来る。
 例えば reference count では、increment には relaxed が使え、並列度が上がる可能性がある。一方 decrement では release が必要。誤削除を防ぐため。
@@ -165,4 +165,17 @@ apple silicon M1 は  lock-free atomic read-modify-write  命令でも memory or
 [aarch64-apple-ios](https://godbolt.org/z/bqKz9M)
 
 [x86_64-unknown-linux-gnu](https://godbolt.org/z/sjTb8W)
+
+# おまけ（２）　store / load  命令の out of order 実行について
+
+store / load  については、 x86 アーキテクチャでも、 ARMv8.3 でも out of order 実行が起こり得ます。
+
+[Memory Reordering Caught in the Act](https://preshing.com/20120515/memory-reordering-caught-in-the-act/)
+
+ここで紹介されている C++ のプログラムを RUST で[書き直して](https://github.com/i-ogata-aist-go-jp/Acquire-Release/tree/main/RUST/ordering) みました。
+
+
+
+
+
 
