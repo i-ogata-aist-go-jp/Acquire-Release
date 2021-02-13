@@ -175,6 +175,12 @@ store / load  については、 x86 アーキテクチャでも、 ARMv8.3 で�
 ここで紹介されている C++ のプログラムを RUST で[書き直し](https://github.com/i-ogata-aist-go-jp/Acquire-Release/tree/main/RUST/ordering/src/main.rs) ました。
 x86 でも store / load の reordering が起きることを実際に試すことができます。
 
+store/load の場合は、 mov(into memory) / mov(from memory)  と  str / ldr  は 1:1 に対応します。
+
+[x86](https://godbolt.org/z/GWbqx5)
+
+[ARMv8.3](https://godbolt.org/z/hY7vnM)
+
 
 
 
