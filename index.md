@@ -183,10 +183,10 @@ x86 でも store / load の reordering が起きることを実際に試すこ�
 
 [ARMv8.3](https://godbolt.org/z/hY7vnM)
 
+##  reordering を避ける（sequential consistency を保つ）ためには x86 では chg 命令を、 ARMv8.3 では STLR / LDAR を使います。
 
+[x86](https://godbolt.org/z/fva8q1)
 
-
-
-
+[ARMv8.3](https://godbolt.org/z/5Y9fGT)
 
 
