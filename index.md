@@ -172,7 +172,10 @@ store / load  については、 x86 アーキテクチャでも、 ARMv8.3 で�
 
 [Memory Reordering Caught in the Act](https://preshing.com/20120515/memory-reordering-caught-in-the-act/)
 
-ここで紹介されている C++ のプログラムを RUST で[書き直して](https://github.com/i-ogata-aist-go-jp/Acquire-Release/tree/main/RUST/ordering) みました。
+ここで紹介されている C++ のプログラムを RUST で[書き直し](https://github.com/i-ogata-aist-go-jp/Acquire-Release/tree/main/RUST/ordering/src/main.rs) ました。
+x86 でも store / load の reordering が起きることを実際に試すことができます。
+
+
 
 
 
