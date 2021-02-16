@@ -146,11 +146,15 @@ cross compiler `$ arm-linux-gnueabihf-gcc -o hello_arm hello.cpp`
 apple silicon M1 は  lock-free atomic read-modify-write  命令でも memory order の指定が出来る。
 例えば reference count では、increment には relaxed が使え、並列度が上がる可能性がある。一方 decrement では release が必要。誤削除を防ぐため。
 
-1) ARMv8.3 (ARM64e) では、 swp/cas/ldadd 命令などがサポートされている。
+1) ARMv8.1 では、 swp/cas/ldadd 命令などがサポートされている。
 
 [RUST/ARMv8.3+ aarch64-apple-darwin](https://godbolt.org/z/7bz8ov)
 
-2) apple 以外の ARMv8.2 以下では [Load-link/store-conditional](https://en.wikipedia.org/wiki/Load-link/store-conditional)  のみのサポートである。
+[LDADD](https://developer.arm.com/documentation/dui0801/g/A64-Data-Transfer-Instructions/LDADDA--LDADDAL--LDADD--LDADDL--LDADDAL--LDADD--LDADDL?lang=en)
+
+Supported in ARMv8.1 and later.
+
+2)  ARMv8.0 では [Load-link/store-conditional](https://en.wikipedia.org/wiki/Load-link/store-conditional)  のみのサポートである。
 
 [RUST/ARMv8 aarch64-unknown-linux-gnu](https://godbolt.org/z/eWE3rG)
 
@@ -187,14 +191,18 @@ x86 でも store / load の reordering が起きることを実際に試すこ�
 
 [x86](https://godbolt.org/z/fva8q1)
 
-[ARMv8.3](https://godbolt.org/z/5Y9fGT)
+[ARMv8.1](https://godbolt.org/z/5Y9fGT)
 
-上記のコンパイル結果は、以下の記述と矛盾している（ような気がします）
+### ARMv8.3 からは、より弱い memory model が採用されている
 
 [Memory consistency model](https://community.arm.com/developer/ip-products/processors/b/processors-ip-blog/posts/armv8-a-architecture-2016-additions)
 
 Instructions are added as part of Armv8.3-A to support the weaker RCpc (Release Consistent processor consistent) model 
 where it is permissible that a Store-Release followed by a Load-Acquire to a different address can be re-ordered. 
+
+[LDAPR](https://developer.arm.com/documentation/dui0801/g/A64-Data-Transfer-Instructions/LDAPR?lang=en)
+
+Load-Acquire RCpc Register. This instruction is supported in architectures ARMv8.3-A and later. 
 
 # おまけ（３） apple と ARM の命令セットの変遷について
 
