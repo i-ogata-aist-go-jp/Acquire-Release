@@ -141,7 +141,42 @@ flag は git の header に相当し、それ以外で store / load されるも
 ## memo
 cross compiler `$ arm-linux-gnueabihf-gcc -o hello_arm hello.cpp`
 
-# おまけ（１）　Read-modify-Write 命令のパフォーマンスについて
+# おまけ（1）　『store命令の後に load命令が続く』場合の out of order 実行について
+
+このシチュエーションでは、 x86 アーキテクチャでの MOV 命令でも、 out of order 実行が起こり得ます。
+
+[Memory Reordering Caught in the Act](https://preshing.com/20120515/memory-reordering-caught-in-the-act/)
+
+実際にプログラムを動かして reorder が起きることを実証します。
+ここで紹介されている C++ のプログラムを RUST で[書き直し](https://github.com/i-ogata-aist-go-jp/Acquire-Release/tree/main/RUST/ordering/src/main.rs) ました。
+x86 でも store / load の reordering が起きることを実際に試すことができます。
+
+`~/Acquire-Release/RUST/ordering$ cargo run --release`
+
+##  そのため、このシチュエーションでは mov(into memory) / mov(from memory)  と  str / ldr  は 1:1 に対応します。
+
+[x86](https://godbolt.org/z/8deM35)
+
+[ARMv8.0](https://godbolt.org/z/GWhnWq)
+
+## このシチュエーションで reordering を避ける（＝ sequential consistency を保つ）ためには x86 では chg 命令を、 ARMv8.1 では STLR / LDAR を使います。
+
+[x86](https://godbolt.org/z/fva8q1)
+
+[ARMv8.0](https://godbolt.org/z/913e87)
+
+### （参考） ARMv8.3 からは、より弱い memory model （＝ reorder を許す LDAPR ）が採用されています
+
+[Memory consistency model](https://community.arm.com/developer/ip-products/processors/b/processors-ip-blog/posts/armv8-a-architecture-2016-additions)
+
+Instructions are added as part of Armv8.3-A to support the weaker RCpc (Release Consistent processor consistent) model 
+where it is permissible that a Store-Release followed by a Load-Acquire to a different address can be re-ordered. 
+
+[LDAPR](https://developer.arm.com/documentation/dui0801/g/A64-Data-Transfer-Instructions/LDAPR?lang=en)
+
+Load-Acquire RCpc Register. This instruction is supported in architectures ARMv8.3-A and later. 
+
+# おまけ（2）　Read-modify-Write 命令のパフォーマンスについて
 
 apple silicon M1 は  lock-free atomic read-modify-write  命令でも memory order の指定が出来る。
 例えば reference count では、increment には relaxed が使え、並列度が上がる可能性がある。一方 decrement では release が必要。誤削除を防ぐため。
@@ -170,39 +205,7 @@ Supported in ARMv8.1 and later.
 
 [x86_64-unknown-linux-gnu](https://godbolt.org/z/sjTb8W)
 
-# おまけ（２）　store / load  命令の out of order 実行について
 
-store / load  については、 x86 アーキテクチャでも、 ARMv8.3 でも out of order 実行が起こり得ます。
-
-[Memory Reordering Caught in the Act](https://preshing.com/20120515/memory-reordering-caught-in-the-act/)
-
-ここで紹介されている C++ のプログラムを RUST で[書き直し](https://github.com/i-ogata-aist-go-jp/Acquire-Release/tree/main/RUST/ordering/src/main.rs) ました。
-x86 でも store / load の reordering が起きることを実際に試すことができます。
-
-`~/Acquire-Release/RUST/ordering$ cargo run --release`
-
-##  store/load の場合は、 mov(into memory) / mov(from memory)  と  str / ldr  は 1:1 に対応します。
-
-[x86](https://godbolt.org/z/8deM35)
-
-[ARMv8.0](https://godbolt.org/z/GWhnWq)
-
-##  reordering を避ける（sequential consistency を保つ）ためには x86 では chg 命令を、 ARMv8.1 では STLR / LDAR を使います。
-
-[x86](https://godbolt.org/z/fva8q1)
-
-[ARMv8.0](https://godbolt.org/z/913e87)
-
-### ARMv8.3 からは、より弱い memory model が採用されている
-
-[Memory consistency model](https://community.arm.com/developer/ip-products/processors/b/processors-ip-blog/posts/armv8-a-architecture-2016-additions)
-
-Instructions are added as part of Armv8.3-A to support the weaker RCpc (Release Consistent processor consistent) model 
-where it is permissible that a Store-Release followed by a Load-Acquire to a different address can be re-ordered. 
-
-[LDAPR](https://developer.arm.com/documentation/dui0801/g/A64-Data-Transfer-Instructions/LDAPR?lang=en)
-
-Load-Acquire RCpc Register. This instruction is supported in architectures ARMv8.3-A and later. 
 
 # おまけ（３） apple と ARM の命令セットの変遷について
 
