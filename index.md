@@ -189,6 +189,11 @@ x86 でも store / load の reordering が起きることを実際に試すこ�
 
 [ARMv8.3](https://godbolt.org/z/5Y9fGT)
 
+[Memory consistency model](https://community.arm.com/developer/ip-products/processors/b/processors-ip-blog/posts/armv8-a-architecture-2016-additions)
+
+Instructions are added as part of Armv8.3-A to support the weaker RCpc (Release Consistent processor consistent) model 
+where it is permissible that a Store-Release followed by a Load-Acquire to a different address can be re-ordered. 
+
 # おまけ（３） apple と ARM の命令セットの変遷について
 
 apple は 2001年の iPod から ARM プロセッサを使ってきた。
@@ -198,5 +203,7 @@ apple は 2001年の iPod から ARM プロセッサを使ってきた。
 2020年の iPhone 12 / apple A14 と　2020年の mac mini,air,pro / apple silicon M1 でも引き続き ARMv8.6-A を採用
 
 [ARM architecture](https://en.wikipedia.org/wiki/ARM_architecture)
+
+
 
 
