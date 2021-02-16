@@ -179,7 +179,7 @@ x86 でも store / load の reordering が起きることを実際に試すこ�
 
 ##  store/load の場合は、 mov(into memory) / mov(from memory)  と  str / ldr  は 1:1 に対応します。
 
-[x86](https://godbolt.org/z/GWbqx5)
+[x86](https://godbolt.org/z/8deM35)
 
 [ARMv8.3](https://godbolt.org/z/hY7vnM)
 
