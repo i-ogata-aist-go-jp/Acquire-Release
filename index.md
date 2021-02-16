@@ -148,7 +148,7 @@ apple silicon M1 は  lock-free atomic read-modify-write  命令でも memory or
 
 1) ARMv8.1 では、 swp/cas/ldadd 命令などがサポートされている。
 
-[RUST/ARMv8.3+ aarch64-apple-darwin](https://godbolt.org/z/7bz8ov)
+[RUST/ARMv8.1 aarch64-apple-darwin](https://godbolt.org/z/7bz8ov)
 
 [LDADD](https://developer.arm.com/documentation/dui0801/g/A64-Data-Transfer-Instructions/LDADDA--LDADDAL--LDADD--LDADDL--LDADDAL--LDADD--LDADDL?lang=en)
 
