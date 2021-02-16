@@ -198,11 +198,11 @@ where it is permissible that a Store-Release followed by a Load-Acquire to a dif
 
 # おまけ（３） apple と ARM の命令セットの変遷について
 
-apple は 2001年の iPod から ARM プロセッサを使ってきた。
-2010年の iPhone 4 / apple A4  は ARMv7-A 命令セットを採用
-2013年の iPhone 5S / apple A7 は ARMv8-A　命令セットで 64ビット化
-2018年の iPhone XS / apple A12 からは ARMv8.3-A 命令セット
-2020年の iPhone 12 / apple A14 と　2020年の mac mini,air,pro / apple silicon M1 でも引き続き ARMv8.6-A を採用
+1. apple は 2001年の iPod から ARM プロセッサを使ってきた。
+1. 2010年の iPhone 4 / apple A4  は ARMv7-A 命令セットを採用
+1. 2013年の iPhone 5S / apple A7 は ARMv8-A　命令セットで 64ビット化
+1. 2018年の iPhone XS / apple A12 からは ARMv8.3-A 命令セット
+1. 2020年の iPhone 12 / apple A14 と　2020年の mac mini,air,pro / apple silicon M1 でも引き続き ARMv8.6-A を採用
 
 [ARM architecture](https://en.wikipedia.org/wiki/ARM_architecture)
 
