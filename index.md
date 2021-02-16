@@ -185,13 +185,13 @@ x86 でも store / load の reordering が起きることを実際に試すこ�
 
 [x86](https://godbolt.org/z/8deM35)
 
-[ARMv8.3](https://godbolt.org/z/hY7vnM)
+[ARMv8.0](https://godbolt.org/z/GWhnWq)
 
 ##  reordering を避ける（sequential consistency を保つ）ためには x86 では chg 命令を、 ARMv8.1 では STLR / LDAR を使います。
 
 [x86](https://godbolt.org/z/fva8q1)
 
-[ARMv8.1](https://godbolt.org/z/5Y9fGT)
+[ARMv8.0](https://godbolt.org/z/913e87)
 
 ### ARMv8.3 からは、より弱い memory model が採用されている
 
