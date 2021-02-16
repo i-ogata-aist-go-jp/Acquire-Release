@@ -189,6 +189,8 @@ x86 でも store / load の reordering が起きることを実際に試すこ�
 
 [ARMv8.3](https://godbolt.org/z/5Y9fGT)
 
+上記のコンパイル結果は、以下の記述と矛盾している（ような気がします）
+
 [Memory consistency model](https://community.arm.com/developer/ip-products/processors/b/processors-ip-blog/posts/armv8-a-architecture-2016-additions)
 
 Instructions are added as part of Armv8.3-A to support the weaker RCpc (Release Consistent processor consistent) model 
