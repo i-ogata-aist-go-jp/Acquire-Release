@@ -215,7 +215,8 @@ Supported in ARMv8.1 and later.
 1. 2017年の iPhone 8, iPhone X / apple A11 は ARMv8.2-A 命令セット。　SWP/CAS/LADD などの read-modify-write 命令をサポート。
 1. 2018年の iPhone XS / apple A12 は ARMv8.3-A 命令セット。　LDAPR で weaker RCpc をサポート。
 1. 2019年の iPhone 11 / apple A13 は ARMV8.4-A 命令セット
-1. 2020年の iPhone 12 / apple A14 と　2020年の mac mini,air,pro / apple silicon M1 は ARMv8.6-A 
+1. 2020年の iPhone 12 / apple A14 は ARMv8.6-A 
+1. 2020年の mac mini,air,pro / apple silicon M1 は ARMv8.6-A と x86互換の memory model mode を採用（？）
 
 [ARM architecture](https://en.wikipedia.org/wiki/ARM_architecture)
 
