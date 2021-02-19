@@ -52,7 +52,7 @@ Apple の
 ### RUST
 
 [x86-64](https://godbolt.org/z/3arKME) 
-[ARMv8](https://godbolt.org/z/6r5j13)
+[ARMv8](https://godbolt.org/z/YvdeW5)
 
 ### C++20
 
