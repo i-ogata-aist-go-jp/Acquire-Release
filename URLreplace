@@ -1,0 +1,7 @@
+#!/bin/bash
+ARG1=`basename $1`
+ARG2=`basename $2`
+echo $ARG1
+echo $ARG2
+sed -i -e "s@$ARG1@$ARG2@"  index.md
+git diff
