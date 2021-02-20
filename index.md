@@ -68,7 +68,7 @@ Apple の
 
 1. x86 の MOV (from memory / into memory) を LDR/STR で emulation することは出来ない。multi-thread な環境では動作が異なり、プログラムの意図通りに動かない可能性があります。
 2. LDAR/STLR で愚直に emulation をすることは出来ますが、これは overhead が大き過ぎて性能低下を招きます。
-3. LDAR の代わりに LDPAR （ARMv8.3-A で導入）も使えます。この場合 overhead は多少は小さくなる。 STLR / LDPAR の sequence の場合に、 LDPAR を先行する out of order 実行が可能となるため。
+3. LDAR の代わりに LDAPR （ARMv8.3-A で導入）も使えます。この場合 overhead は多少は小さくなる。 STLR / LDAPR の sequence の場合に、 LDAPR を先行する out of order 実行が可能となるため。
 
  上記のようなソフトウェア（機械語だけ）での解決策を性能的に不満と見た apple は、 MOV を LDR/STR に返還した上で memory order としては TSO で動かす「互換モード」をハードウェア的に M1 に付け加えたようなのです。
 
