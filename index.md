@@ -90,7 +90,7 @@ Go's atomics Load* and Store* guarantee sequential consistency among the atomic 
 1. CPP で make all　　（以下の 2つの make all を実行します）
  - CPP/fuction thread を fuction で呼び出すコード。 　make all でコンパイル。 function/bin/function で実行
  - CPP/closure thread を closure で呼び出すコード。 　make all でコンパイル。 closure/bin/closure で実行
-. RUST/ars RUST で書くとこうなる。 cargo run で動きます。
+2. 同じことを RUST/ars RUST で書くとこうなる。 `~/Acquire-Release/RUST/ars/cargo run` で動きます。
 
 ## memory order: 特に ARMv8 が採用する acquire release について
 
