@@ -64,12 +64,13 @@ Apple の
 
 2. その一方で ARMv8 では OoOE を許す LDR/STR と、OoOE に制限がかかる LDAR/STLR ( load Acquire / store reLease )　の２系統の命令があります。後者が memory barrier の機能を提供します。 
 
-結論として
+具体的に x86 の TSO  を ARMv8.0-A で emulation をする方法を考えてみます。
 
-1. x86 の MOV (from memory / into memory) を LDR/STR で emulation することは出来ない。multi-thread な環境では意味が違ってしまうからです。
-2. もちろん　LDAR/STLR で愚直に emulation をすることは出来ますが、これは overhead が大きすぎる。
+1. x86 の MOV (from memory / into memory) を LDR/STR で emulation することは出来ない。multi-thread な環境では動作が異なり、プログラムの意図通りに動かない可能性があります。
+2. LDAR/STLR で愚直に emulation をすることは出来ますが、これは overhead が大き過ぎて性能低下を招きます。
+3. LDAR の代わりに LDPAR （ARMv8.3-A で導入）も使えます。この場合 overhead は多少は小さくなる。 STLR / LDPAR の sequence の場合に、 LDPAR を先行する out of order 実行が可能となるため。
 
-そこで apple は LDR/STR を TSO で動かす「互換モード」を M1 に付け加えたようなのです。
+ 上記のようなソフトウェア（機械語だけ）での解決策を性能的に不満と見た apple は、 MOV を LDR/STR に返還した上で memory order としては TSO で動かす「互換モード」をハードウェア的に M1 に付け加えたようなのです。
 
 ## 実際に動くコード
 
