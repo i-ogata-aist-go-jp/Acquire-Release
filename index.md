@@ -90,7 +90,9 @@ Go's atomics Load* and Store* guarantee sequential consistency among the atomic 
 1. CPP で make all　　（以下の 2つの make all を実行します）
  - CPP/fuction thread を fuction で呼び出すコード。 　make all でコンパイル。 function/bin/function で実行
  - CPP/closure thread を closure で呼び出すコード。 　make all でコンパイル。 closure/bin/closure で実行
-2. 同じことを RUST/ars RUST で書くとこうなる。 `~/Acquire-Release/RUST/ars/cargo run` で動きます。
+2. 同じことを RUST/ars RUST で書きました。
+`~/Acquire-Release/RUST/ars$ cargo run` で動きます。
+
 
 ## memory order: 特に ARMv8 が採用する acquire release について
 
@@ -151,7 +153,8 @@ cross compiler `$ arm-linux-gnueabihf-gcc -o hello_arm hello.cpp`
 [Memory Reordering Caught in the Act](https://preshing.com/20120515/memory-reordering-caught-in-the-act/)
 
 実際にプログラムを動かして reorder が起きることを実証します。
-ここで紹介されている C++ のプログラムを RUST で[書き直し](https://github.com/i-ogata-aist-go-jp/Acquire-Release/tree/main/RUST/ordering/src/main.rs) ました。
+ここで紹介されている C++ のプログラムを RUST で書き直しました。
+[こちら](https://github.com/i-ogata-aist-go-jp/Acquire-Release/tree/main/RUST/ordering/src/main.rs) です。
 x86 でも store / load の reordering が起きることを実際に試すことができます。
 
 `~/Acquire-Release/RUST/ordering$ cargo run --release`
