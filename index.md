@@ -52,12 +52,8 @@ Apple の
 ### RUST
 
 [x86-64](https://godbolt.org/z/3arKME) 
+
 [ARMv8](https://godbolt.org/z/YvdeW5)
-
-### C++20
-
-[X86-64](https://godbolt.org/z/x7j1rc) 
-[ARMv8](https://godbolt.org/z/chsbxK)
 
 ## 解説
 
@@ -113,6 +109,12 @@ flag は git の header に相当し、それ以外で store / load されるも
 - ファイルを編集（変更）した結果をすべて repository に書き込んだ上で header を書き込む（更新する）操作が git push 
 - header を読み取り、ファイルの変更を repository から読み出すのが git pull 
 - git pull した情報は（最新ではないかもしれないが）　header に関して consistent である。
+
+### C++20 でも Acquire Release な memory order を書くことが可能です。
+
+[X86-64](https://godbolt.org/z/x7j1rc) 
+
+[ARMv8](https://godbolt.org/z/chsbxK)
 
 ## References
 
