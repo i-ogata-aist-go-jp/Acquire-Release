@@ -68,7 +68,7 @@ x86 の memory model は Total Store Order (TSO) であり ARMv8 は Acquire-Rel
 2. LDAR/STLR で愚直に emulation をすることは出来ますが、これは overhead が大き過ぎて性能低下を招きます。
 3. LDAR の代わりに LDAPR （ARMv8.3-A で導入）も使えます。この場合 overhead は多少は小さくなる。 STLR / LDAPR の sequence の場合に、 LDAPR を先行する out of order 実行が可能となるため。
 
- 上記のようなソフトウェア（機械語だけ）での解決策を性能的に不満と見た apple は、 MOV を LDR/STR に返還した上で memory order としては TSO で動かす「互換モード」をハードウェア的に M1 に付け加えたようなのです。
+ 上記のようなソフトウェア（機械語そのまま）での解決策を性能的に不満と見た apple は、 MOV を LDR/STR へ単純に変換した上で、 LDR/STR を TSO で動かす「互換モード」をハードウェア的に M1 に付け加えたようなのです。
 
 ## 実際に動くコード
 
