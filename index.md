@@ -1,11 +1,13 @@
-# Apple macbook air (2020,M1) の Rossetta 2 爆速の謎を解く
+# Apple Rossetta 2 爆速の秘密
+## apple silicon M1 な mac （macbook air (2020,M1) など）が intel x86 のバイナリーそのまま高速で実行できる理由
 
-心臓部の SoC [apple silicon M1](https://en.wikipedia.org/wiki/Apple_M1) 
-が消費電力あたりで史上最高のプロセッサであることは、既に広く解説されている通りです。
-しかし
+搭載する  [apple silicon M1](https://en.wikipedia.org/wiki/Apple_M1) 
+が消費電力あたりで史上最高の爆速なことは、既に広く解説されている通りです。
+しかし　intel x86 のバイナリーをそのまま M1 で実行するためのemulator である
 [Rosseta2](https://en.wikipedia.org/wiki/Rosetta_(software)#Rosetta_2)
-が爆速についての適切な解説は少ないように感じます。（Rosetta2 は X86 のバイナリーをそのまま ARMv8 で emulation するアプリ）
-実は、これを理解するためには技術的にはちょっと複雑な知識 
+が爆速な件の解説は少ないように感じます。
+
+実は、この秘密を理解するためにはちょっと複雑な知識 
 （
 [memory barrier](https://en.wikipedia.org/wiki/Memory_barrier) /
 [memory model](https://en.wikipedia.org/wiki/Memory_model_(programming)) /
@@ -16,22 +18,20 @@
 
 ## 概要
 
-最新の macbook air や mac mini は爆速ですよね。心臓の apple silicon M1 という SoC は消費電力あたりで史上最高のプロセッサです。 TSMC 5nm (N5) という最先端のプロセスを採用し 160億トランジスタを集積しています。
+M1 の CPU部分は ARMv8 アーキテクチャです。これまでは intel x86 プロセッサを搭載していました。これまでの x86 バイナリーは、そのままでは動きません。
+そこで apple は x86 を ARMv8 で emulation する Rosseta2 というシステムが提供しています。これがまた爆速なのですが、そこには秘密があります。
 
-M1 の CPU は ARMv8 アーキテクチャです。　macbook / mac mini は、これまでは intel を使っていました。 x86 -> ARMv8 の移行を助けるために、 x86 バイナリーを emulation する Rosseta2 というシステムが提供されています。これがまた爆速なのですが、そこには秘密があります。
+x86 を ARMv8 で emulation する障害の一つが memory model の違いです。 
+x86 の memory model は Total Store Order (TSO) であり ARMv8 は Acquire-Release　semantics なのです。
+言い換えれば memory barrier に関する機械語の命令の動作の違いがあり、x86 を ARMv8 で *効率よく*  emulation するのは難しいのです。
 
-x86 を ARMv8 で emulation する障害の一つが memory model の違いです。 x86 は Total Store Order (TSO) であり ARMv8 は Acquire-Release　semantics なのです。つまり memory barrier 命令の違いがあり、x86 を ARMv8 で『効率よく』 emulation するのは難しい。
+そこで apple は特別な「互換モード」をハードウェア的に付け加えたらしいのです（この情報は公開されていないので、間違っているかもしれません）。
 
-そこで apple は特別な「互換モード」をハードウェア的に付け加えたらしいのです（この情報は公開されていなくて、現時点では噂）
-
-## Rosetta2 の爆速の秘密を一言で言えば『x86 と ARMv8 の memory ordering の違いを互換モードで解決する力技』
+## Rosetta2 の爆速の秘密は 『x86 と ARMv8 の memory model の違いを互換モードで吸収する力技』
 
 これを理解してもらうことが本稿の目的です。
 
-Apple の 
-[Rosseta2](https://en.wikipedia.org/wiki/Rosetta_(software)#Rosetta_2) 
-は intel x86 の機械語を ARMv8 の機械語で emulate して実行する仕組みです。爆速を実現するためにハードウェア（互換モード）の追加が必要だったという噂（未公開情報）です。
-具体的には load / store 命令の out-of-order 実行を制限するモードがある（らしい）のです。
+具体的には ARMv8 の load / store 命令である  LDR/STR の out-of-order 実行を制限するモードがある（らしい）のです。
 
 このモードの必要性を理解には、以下の知識が必要です。
 
@@ -40,16 +40,14 @@ Apple の
  * x86 は Total Store Order (TSO) である。
  * ARMv8 は Acquire Release Order である。
 
-## 方法
+## memory order について理解するためのプログラム
 
 1. x86 と ARMv8 の memory model の違いを理解するための、最小のサンプルコードを作った
-2. ARMv8 の memory model は Acquire-Release semantics を持つ。そこでプログラミング言語のレベルで Acquire-Release semanitcs を採用していて相性の良い RUST と C++20 を採用する。 
-3. サンプルコードを x86 と ARMv8 をターゲットに compile し、その assembler の出力が違うことを [Compiler Explorer](https://godbolt.org/)で見てみる
-4.  x86 の MOV 命令が ARMv8 の LDR/STR 命令には変換できないことの説明となっている
+2. ARMv8 の memory model は Acquire-Release semantics を持つ。そこでプログラミング言語のレベルで Acquire-Release semanitcs を採用していて相性の良い RUST （と C++20）を使う。 
+3. サンプルコードを x86 と ARMv8 のそれぞれをターゲットに compile し、その assembler の出力が違うことを [Compiler Explorer](https://godbolt.org/)で見る。
+4. x86 の MOV 命令が ARMv8 の LDR/STR 命令には、そのまま変換できるわけではない。
 
-## 結果
-
-### RUST
+## RUSTのプログラム
 
 [x86-64](https://godbolt.org/z/3arKME) 
 
@@ -74,9 +72,12 @@ Apple の
 
 ## 実際に動くコード
 
+上記は理解を助けるためのサンプルコードでした。実際に動かせるコードを紹介します。
+
 [memory barrier by Wikipedia](https://en.wikipedia.org/wiki/Memory_barrier)
 
-memory barrier についての wikipedia を題材に x86 と ARMv8 の memory model の違いの説明を試みています。おおまかな作戦は以下の通り。
+このコードでは x86 と ARMv8 の memory model の違いの説明を試みています。 memory barrier についての wikipedia を題材にしました。
+おおまかな方針は以下の通り。
 
 - memory model の違いが分かる最小のサンプルコードを作ることとする。
 - プログラミング言語のレベルで Acquire-Release semanitcs を採用する C++20 と RUST で示す。 
@@ -85,7 +86,7 @@ memory barrier についての wikipedia を題材に x86 と ARMv8 の memory m
 ちなみに Go は acquire / release semantics はサポートしません。より強力な sequential consistency のみがサポートされます。
 Go's atomics Load* and Store* guarantee sequential consistency among the atomic variables (behave like C/C++'s seqconst atomics).
 
-実際に動くコードは [github](https://github.com/i-ogata-aist-go-jp/Acquire-Release)　で公開しています。
+コードは [github](https://github.com/i-ogata-aist-go-jp/Acquire-Release)　で公開しています。
 
 1. CPP で make all　　（以下の 2つの make all を実行します）
  - CPP/fuction thread を fuction で呼び出すコード。 　make all でコンパイル。 function/bin/function で実行
